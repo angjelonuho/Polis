@@ -942,3 +942,10 @@ background-color: #d8d8d8;
 .lgfivetwelve{
   background-color: #da9ad3 !important;
 }
+
+
+.mapDiv {
+  height: 100vh;
+  width: auto;
+  padding: 2% 0 2% 0 !important;
+}
