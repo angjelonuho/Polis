@@ -47,7 +47,7 @@ class GoogleMapComp extends Component {
 
   render() {
     return (
-      <div className="container-fluid mapDiv" id="map"></div>
+      <div className="container-fluid mapDiv rounded" id="map"></div>
     )
   }
 

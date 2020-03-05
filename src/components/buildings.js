@@ -3,40 +3,25 @@ import { Modal, Image, Container, Row, Col, Carousel, Tab, Nav, Card, Button, Me
 
 const API_KEY = 'AIzaSyD8k5qUSvlHzgITZ4o1icvEgpMromP4s2c';
 
+//Place details
+const nameTitle = [];
+const address = [];
+const phoneNumber = [];
+const rating = [];
+const userRatingTotal = [];
+const website = [];
+const images = [];
+
+//Place reviews
+const reviewsName = [];
+const reviewsPhoto = [];
+const reviewsRating = [];
+const reviewsTime = [];
+const reviewsText = [];
+
 export default class GenerateBuildings extends React.Component {
 
-  constructor(props) {
-    super(props);
-
-
-    this.state = {
-      showModal: false,
-      lat: undefined,
-      lon: undefined,
-      placeId: undefined,
-      nameTitle: [],
-      address: [],
-      phoneNumber: [],
-      rating: [],
-      userRatingTotal: [],
-      website: [],
-      images: [],
-
-
-      reviewsName: [],
-      reviewsLanguage: [],
-      reviewsPhoto: [],
-      reviewsRating: [],
-      reviewsTime: [],
-      reviewsText: [],
-
-
-
-
-    }
-  }
-
-
+  state = { showModal: false }
 
   getPosition = () => {
     return new Promise(function (resolve, reject) {
@@ -45,14 +30,8 @@ export default class GenerateBuildings extends React.Component {
   }
 
   getPlaces = async (latitude, longitude) => {
-    const api_call = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=10000&key=${API_KEY}`);
+    const api_call = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1000&key=${API_KEY}`);
     const data = await api_call.json();
-
-    this.setState({
-      lat: latitude,
-      lon: longitude
-
-    })
 
     let arrayPlaceIds = [];
     let api_Details = [];
@@ -64,21 +43,21 @@ export default class GenerateBuildings extends React.Component {
       api_Details = await fetch(`/maps/api/place/details/json?place_id=${arrayPlaceIds[i]}&key=${API_KEY}`);
       DeData = await api_Details.json();
 
-      this.state.nameTitle.push(DeData.result.name);
-      this.state.address.push(DeData.result.vicinity);
-      this.state.phoneNumber.push(DeData.result.international_phone_number);
-      this.state.rating.push(DeData.result.rating);
-      this.state.userRatingTotal.push(DeData.result.user_ratings_total);
-      this.state.website.push(DeData.result.website);
+      nameTitle.push(DeData.result.name);
+      address.push(DeData.result.vicinity);
+      phoneNumber.push(DeData.result.international_phone_number);
+      rating.push(DeData.result.rating);
+      userRatingTotal.push(DeData.result.user_ratings_total);
+      website.push(DeData.result.website);
 
 
       for (let x = 0; x <= 4; x++) {
         if (DeData.result.hasOwnProperty('reviews') && DeData.result.reviews[x] !== undefined) {
-          this.state.reviewsName.push(DeData.result.reviews[x].author_name);
-          this.state.reviewsText.push(DeData.result.reviews[x].text);
-          this.state.reviewsPhoto.push(DeData.result.reviews[x].profile_photo_url);
-          this.state.reviewsTime.push(DeData.result.reviews[x].relative_time_description);
-          this.state.reviewsRating.push(DeData.result.reviews[x].rating);
+          reviewsName.push(DeData.result.reviews[x].author_name);
+          reviewsText.push(DeData.result.reviews[x].text);
+          reviewsPhoto.push(DeData.result.reviews[x].profile_photo_url);
+          reviewsTime.push(DeData.result.reviews[x].relative_time_description);
+          reviewsRating.push(DeData.result.reviews[x].rating);
 
         } else {
           x++;
@@ -94,7 +73,7 @@ export default class GenerateBuildings extends React.Component {
       }
     }
     for (let g = 0; g <= arrayImageCodes.length; g++) {
-      this.state.images.push('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=' + arrayImageCodes[g] + '&key=' + API_KEY);
+      images.push('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=' + arrayImageCodes[g] + '&key=' + API_KEY);
     }
 
   }
@@ -104,7 +83,7 @@ export default class GenerateBuildings extends React.Component {
 
     let stars;
 
-    switch (this.state.reviewsRating[reviewNumb]) {
+    switch (reviewsRating[reviewNumb]) {
       case 1:
         stars =
           <span>
@@ -235,28 +214,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[0]} />
+                              <Image className="rounded mx-auto d-block" src={images[0]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[1]} />
+                              <Image className="rounded mx-auto d-block" src={images[1]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[2]} />
+                              <Image className="rounded mx-auto d-block" src={images[2]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[3]} />
+                              <Image className="rounded mx-auto d-block" src={images[3]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgone"><span className="inputTittles">name</span>{this.state.nameTitle[0]}</ListGroup.Item>
-                              <ListGroup.Item className="lgtwo"><span className="inputTittles">address</span>{this.state.address[0]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthree"><span className="inputTittles">rating</span>{this.state.rating[0]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfour"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[0]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfive"><span className="inputTittles">phone</span>{this.state.phoneNumber[0]}</ListGroup.Item>
+                              <ListGroup.Item className="lgone"><span className="inputTittles">name</span>{nameTitle[0]}</ListGroup.Item>
+                              <ListGroup.Item className="lgtwo"><span className="inputTittles">address</span>{address[0]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthree"><span className="inputTittles">rating</span>{rating[0]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfour"><span className="inputTittles">total ratings</span>{userRatingTotal[0]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfive"><span className="inputTittles">phone</span>{phoneNumber[0]}</ListGroup.Item>
                               <ListGroup.Item className="lgsix">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[0]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[0]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -280,55 +259,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[0]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[0]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[0]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[0]}</small>
+                                        <h5 className="reviewName">{reviewsName[0]}
+                                          <small className="reviewTime"> {reviewsTime[0]}</small>
                                           {this.ratingReview(0)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[0]}</p>
+                                        <p className="reviewText">{reviewsText[0]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[1]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[1]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[1]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[1]}</small>
+                                        <h5 className="reviewName">{reviewsName[1]}
+                                          <small className="reviewTime"> {reviewsTime[1]}</small>
                                           {this.ratingReview(1)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[1]}</p>
+                                        <p className="reviewText">{reviewsText[1]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[2]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[2]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[2]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[2]}</small>
+                                        <h5 className="reviewName">{reviewsName[2]}
+                                          <small className="reviewTime"> {reviewsTime[2]}</small>
                                           {this.ratingReview(2)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[2]}</p>
+                                        <p className="reviewText">{reviewsText[2]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[3]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[3]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[3]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[3]}</small>
+                                        <h5 className="reviewName">{reviewsName[3]}
+                                          <small className="reviewTime"> {reviewsTime[3]}</small>
                                           {this.ratingReview(3)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[3]}</p>
+                                        <p className="reviewText">{reviewsText[3]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[4]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[4]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[4]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[4]}</small>
+                                        <h5 className="reviewName">{reviewsName[4]}
+                                          <small className="reviewTime"> {reviewsTime[4]}</small>
                                           {this.ratingReview(4)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[4]}</p>
+                                        <p className="reviewText">{reviewsText[4]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -365,28 +344,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[4]} />
+                              <Image className="rounded mx-auto d-block" src={images[4]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[5]} />
+                              <Image className="rounded mx-auto d-block" src={images[5]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[6]} />
+                              <Image className="rounded mx-auto d-block" src={images[6]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[7]} />
+                              <Image className="rounded mx-auto d-block" src={images[7]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgone1"><span className="inputTittles">name</span>{this.state.nameTitle[1]}</ListGroup.Item>
-                              <ListGroup.Item className="lgtwo2"><span className="inputTittles">address</span>{this.state.address[1]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthree3"><span className="inputTittles">rating</span>{this.state.rating[1]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfour4"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[1]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfive5"><span className="inputTittles">phone</span>{this.state.phoneNumber[1]}</ListGroup.Item>
+                              <ListGroup.Item className="lgone1"><span className="inputTittles">name</span>{nameTitle[1]}</ListGroup.Item>
+                              <ListGroup.Item className="lgtwo2"><span className="inputTittles">address</span>{address[1]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthree3"><span className="inputTittles">rating</span>{rating[1]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfour4"><span className="inputTittles">total ratings</span>{userRatingTotal[1]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfive5"><span className="inputTittles">phone</span>{phoneNumber[1]}</ListGroup.Item>
                               <ListGroup.Item className="lgsix6">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[1]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[1]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -410,55 +389,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[5]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[5]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[5]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[5]}</small>
+                                        <h5 className="reviewName">{reviewsName[5]}
+                                          <small className="reviewTime"> {reviewsTime[5]}</small>
                                           {this.ratingReview(5)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[5]}</p>
+                                        <p className="reviewText">{reviewsText[5]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[6]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[6]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[6]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[6]}</small>
+                                        <h5 className="reviewName">{reviewsName[6]}
+                                          <small className="reviewTime"> {reviewsTime[6]}</small>
                                           {this.ratingReview(6)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[6]}</p>
+                                        <p className="reviewText">{reviewsText[6]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[7]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[7]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[7]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[7]}</small>
+                                        <h5 className="reviewName">{reviewsName[7]}
+                                          <small className="reviewTime"> {reviewsTime[7]}</small>
                                           {this.ratingReview(7)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[7]}</p>
+                                        <p className="reviewText">{reviewsText[7]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[8]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[8]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[8]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[8]}</small>
+                                        <h5 className="reviewName">{reviewsName[8]}
+                                          <small className="reviewTime"> {reviewsTime[8]}</small>
                                           {this.ratingReview(8)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[8]}</p>
+                                        <p className="reviewText">{reviewsText[8]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[9]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[9]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[9]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[9]}</small>
+                                        <h5 className="reviewName">{reviewsName[9]}
+                                          <small className="reviewTime"> {reviewsTime[9]}</small>
                                           {this.ratingReview(9)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[9]}</p>
+                                        <p className="reviewText">{reviewsText[9]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -494,28 +473,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[8]} />
+                              <Image className="rounded mx-auto d-block" src={images[8]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[9]} />
+                              <Image className="rounded mx-auto d-block" src={images[9]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[10]} />
+                              <Image className="rounded mx-auto d-block" src={images[10]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[11]} />
+                              <Image className="rounded mx-auto d-block" src={images[11]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgonetwo"><span className="inputTittles">name</span>{this.state.nameTitle[2]}</ListGroup.Item>
-                              <ListGroup.Item className="lgtwotwo"><span className="inputTittles">address</span>{this.state.address[2]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreetwo"><span className="inputTittles">rating</span>{this.state.rating[2]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfourtwo"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[2]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfivetwo"><span className="inputTittles">phone</span>{this.state.phoneNumber[2]}</ListGroup.Item>
+                              <ListGroup.Item className="lgonetwo"><span className="inputTittles">name</span>{nameTitle[2]}</ListGroup.Item>
+                              <ListGroup.Item className="lgtwotwo"><span className="inputTittles">address</span>{address[2]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreetwo"><span className="inputTittles">rating</span>{rating[2]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfourtwo"><span className="inputTittles">total ratings</span>{userRatingTotal[2]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfivetwo"><span className="inputTittles">phone</span>{phoneNumber[2]}</ListGroup.Item>
                               <ListGroup.Item className="lgsixtwo">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[2]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[2]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -539,55 +518,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[10]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[10]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[10]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[10]}</small>
+                                        <h5 className="reviewName">{reviewsName[10]}
+                                          <small className="reviewTime"> {reviewsTime[10]}</small>
                                           {this.ratingReview(10)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[10]}</p>
+                                        <p className="reviewText">{reviewsText[10]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[11]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[11]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[11]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[11]}</small>
+                                        <h5 className="reviewName">{reviewsName[11]}
+                                          <small className="reviewTime"> {reviewsTime[11]}</small>
                                           {this.ratingReview(11)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[11]}</p>
+                                        <p className="reviewText">{reviewsText[11]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[12]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[12]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[12]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[12]}</small>
+                                        <h5 className="reviewName">{reviewsName[12]}
+                                          <small className="reviewTime"> {reviewsTime[12]}</small>
                                           {this.ratingReview(12)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[12]}</p>
+                                        <p className="reviewText">{reviewsText[12]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[13]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[13]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[13]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[13]}</small>
+                                        <h5 className="reviewName">{reviewsName[13]}
+                                          <small className="reviewTime"> {reviewsTime[13]}</small>
                                           {this.ratingReview(13)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[13]}</p>
+                                        <p className="reviewText">{reviewsText[13]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[14]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[14]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[14]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[14]}</small>
+                                        <h5 className="reviewName">{reviewsName[14]}
+                                          <small className="reviewTime"> {reviewsTime[14]}</small>
                                           {this.ratingReview(14)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[14]}</p>
+                                        <p className="reviewText">{reviewsText[14]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -622,28 +601,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[12]} />
+                              <Image className="rounded mx-auto d-block" src={images[12]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[13]} />
+                              <Image className="rounded mx-auto d-block" src={images[13]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[14]} />
+                              <Image className="rounded mx-auto d-block" src={images[14]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[15]} />
+                              <Image className="rounded mx-auto d-block" src={images[15]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgonethree"><span className="inputTittles">name</span>{this.state.nameTitle[3]}</ListGroup.Item>
-                              <ListGroup.Item className="lgtwothree"><span className="inputTittles">address</span>{this.state.address[3]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreethree"><span className="inputTittles">rating</span>{this.state.rating[3]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfourthree"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[3]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfivethree"><span className="inputTittles">phone</span>{this.state.phoneNumber[3]}</ListGroup.Item>
+                              <ListGroup.Item className="lgonethree"><span className="inputTittles">name</span>{nameTitle[3]}</ListGroup.Item>
+                              <ListGroup.Item className="lgtwothree"><span className="inputTittles">address</span>{address[3]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreethree"><span className="inputTittles">rating</span>{rating[3]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfourthree"><span className="inputTittles">total ratings</span>{userRatingTotal[3]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfivethree"><span className="inputTittles">phone</span>{phoneNumber[3]}</ListGroup.Item>
                               <ListGroup.Item className="lgsixthree">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[3]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[3]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -667,55 +646,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[11]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[11]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[15]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[15]}</small>
+                                        <h5 className="reviewName">{reviewsName[15]}
+                                          <small className="reviewTime"> {reviewsTime[15]}</small>
                                           {this.ratingReview(15)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[15]}</p>
+                                        <p className="reviewText">{reviewsText[15]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[16]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[16]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[16]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[16]}</small>
+                                        <h5 className="reviewName">{reviewsName[16]}
+                                          <small className="reviewTime"> {reviewsTime[16]}</small>
                                           {this.ratingReview(16)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[16]}</p>
+                                        <p className="reviewText">{reviewsText[16]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[17]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[17]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[17]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[17]}</small>
+                                        <h5 className="reviewName">{reviewsName[17]}
+                                          <small className="reviewTime"> {reviewsTime[17]}</small>
                                           {this.ratingReview(17)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[17]}</p>
+                                        <p className="reviewText">{reviewsText[17]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[18]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[18]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[18]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[18]}</small>
+                                        <h5 className="reviewName">{reviewsName[18]}
+                                          <small className="reviewTime"> {reviewsTime[18]}</small>
                                           {this.ratingReview(18)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[18]}</p>
+                                        <p className="reviewText">{reviewsText[18]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[19]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[19]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[19]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[19]}</small>
+                                        <h5 className="reviewName">{reviewsName[19]}
+                                          <small className="reviewTime"> {reviewsTime[19]}</small>
                                           {this.ratingReview(19)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[19]}</p>
+                                        <p className="reviewText">{reviewsText[19]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -749,28 +728,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[16]} />
+                              <Image className="rounded mx-auto d-block" src={images[16]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[17]} />
+                              <Image className="rounded mx-auto d-block" src={images[17]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[18]} />
+                              <Image className="rounded mx-auto d-block" src={images[18]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[19]} />
+                              <Image className="rounded mx-auto d-block" src={images[19]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgonefour"><span className="inputTittles">name</span>{this.state.nameTitle[4]}</ListGroup.Item>
-                              <ListGroup.Item className="lgtwofour"><span className="inputTittles">address</span>{this.state.address[4]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreefour"><span className="inputTittles">rating</span>{this.state.rating[4]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfourfour"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[4]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfivefour"><span className="inputTittles">phone</span>{this.state.phoneNumber[4]}</ListGroup.Item>
+                              <ListGroup.Item className="lgonefour"><span className="inputTittles">name</span>{nameTitle[4]}</ListGroup.Item>
+                              <ListGroup.Item className="lgtwofour"><span className="inputTittles">address</span>{address[4]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreefour"><span className="inputTittles">rating</span>{rating[4]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfourfour"><span className="inputTittles">total ratings</span>{userRatingTotal[4]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfivefour"><span className="inputTittles">phone</span>{phoneNumber[4]}</ListGroup.Item>
                               <ListGroup.Item className="lgsixfour">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[4]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[4]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -794,55 +773,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[20]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[20]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[20]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[20]}</small>
+                                        <h5 className="reviewName">{reviewsName[20]}
+                                          <small className="reviewTime"> {reviewsTime[20]}</small>
                                           {this.ratingReview(20)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[20]}</p>
+                                        <p className="reviewText">{reviewsText[20]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[21]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[21]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[21]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[21]}</small>
+                                        <h5 className="reviewName">{reviewsName[21]}
+                                          <small className="reviewTime"> {reviewsTime[21]}</small>
                                           {this.ratingReview(21)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[21]}</p>
+                                        <p className="reviewText">{reviewsText[21]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[22]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[22]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[22]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[22]}</small>
+                                        <h5 className="reviewName">{reviewsName[22]}
+                                          <small className="reviewTime"> {reviewsTime[22]}</small>
                                           {this.ratingReview(22)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[22]}</p>
+                                        <p className="reviewText">{reviewsText[22]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[23]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[23]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[23]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[23]}</small>
+                                        <h5 className="reviewName">{reviewsName[23]}
+                                          <small className="reviewTime"> {reviewsTime[23]}</small>
                                           {this.ratingReview(23)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[23]}</p>
+                                        <p className="reviewText">{reviewsText[23]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[24]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[24]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[24]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[24]}</small>
+                                        <h5 className="reviewName">{reviewsName[24]}
+                                          <small className="reviewTime"> {reviewsTime[24]}</small>
                                           {this.ratingReview(24)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[24]}</p>
+                                        <p className="reviewText">{reviewsText[24]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -881,28 +860,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[20]} />
+                              <Image className="rounded mx-auto d-block" src={images[20]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[21]} />
+                              <Image className="rounded mx-auto d-block" src={images[21]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[22]} />
+                              <Image className="rounded mx-auto d-block" src={images[22]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[23]} />
+                              <Image className="rounded mx-auto d-block" src={images[23]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgonefive"><span className="inputTittles">name</span>{this.state.nameTitle[5]}</ListGroup.Item>
-                              <ListGroup.Item className="lgtwofive"><span className="inputTittles">address</span>{this.state.address[5]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreefive"><span className="inputTittles">rating</span>{this.state.rating[5]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfourfive"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[5]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfivefive"><span className="inputTittles">phone</span>{this.state.phoneNumber[5]}</ListGroup.Item>
+                              <ListGroup.Item className="lgonefive"><span className="inputTittles">name</span>{nameTitle[5]}</ListGroup.Item>
+                              <ListGroup.Item className="lgtwofive"><span className="inputTittles">address</span>{address[5]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreefive"><span className="inputTittles">rating</span>{rating[5]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfourfive"><span className="inputTittles">total ratings</span>{userRatingTotal[5]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfivefive"><span className="inputTittles">phone</span>{phoneNumber[5]}</ListGroup.Item>
                               <ListGroup.Item className="lgsixfive">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[5]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[5]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -926,55 +905,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[25]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[25]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[25]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[25]}</small>
+                                        <h5 className="reviewName">{reviewsName[25]}
+                                          <small className="reviewTime"> {reviewsTime[25]}</small>
                                           {this.ratingReview(25)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[25]}</p>
+                                        <p className="reviewText">{reviewsText[25]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[26]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[26]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[26]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[26]}</small>
+                                        <h5 className="reviewName">{reviewsName[26]}
+                                          <small className="reviewTime"> {reviewsTime[26]}</small>
                                           {this.ratingReview(26)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[26]}</p>
+                                        <p className="reviewText">{reviewsText[26]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[27]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[27]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[27]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[27]}</small>
+                                        <h5 className="reviewName">{reviewsName[27]}
+                                          <small className="reviewTime"> {reviewsTime[27]}</small>
                                           {this.ratingReview(27)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[27]}</p>
+                                        <p className="reviewText">{reviewsText[27]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[28]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[28]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[28]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[28]}</small>
+                                        <h5 className="reviewName">{reviewsName[28]}
+                                          <small className="reviewTime"> {reviewsTime[28]}</small>
                                           {this.ratingReview(28)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[28]}</p>
+                                        <p className="reviewText">{reviewsText[28]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[29]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[29]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[29]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[29]}</small>
+                                        <h5 className="reviewName">{reviewsName[29]}
+                                          <small className="reviewTime"> {reviewsTime[29]}</small>
                                           {this.ratingReview(29)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[29]}</p>
+                                        <p className="reviewText">{reviewsText[29]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -1011,28 +990,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[24]} />
+                              <Image className="rounded mx-auto d-block" src={images[24]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[25]} />
+                              <Image className="rounded mx-auto d-block" src={images[25]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[26]} />
+                              <Image className="rounded mx-auto d-block" src={images[26]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[27]} />
+                              <Image className="rounded mx-auto d-block" src={images[27]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgonesix"><span className="inputTittles">name</span>{this.state.nameTitle[6]}</ListGroup.Item>
-                              <ListGroup.Item className="lgtwosix"><span className="inputTittles">address</span>{this.state.address[6]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreesix"><span className="inputTittles">rating</span>{this.state.rating[6]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfoursix"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[6]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfivesix"><span className="inputTittles">phone</span>{this.state.phoneNumber[6]}</ListGroup.Item>
+                              <ListGroup.Item className="lgonesix"><span className="inputTittles">name</span>{nameTitle[6]}</ListGroup.Item>
+                              <ListGroup.Item className="lgtwosix"><span className="inputTittles">address</span>{address[6]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreesix"><span className="inputTittles">rating</span>{rating[6]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfoursix"><span className="inputTittles">total ratings</span>{userRatingTotal[6]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfivesix"><span className="inputTittles">phone</span>{phoneNumber[6]}</ListGroup.Item>
                               <ListGroup.Item className="lgsixsix">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[6]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[6]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -1056,55 +1035,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[30]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[30]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[30]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[30]}</small>
+                                        <h5 className="reviewName">{reviewsName[30]}
+                                          <small className="reviewTime"> {reviewsTime[30]}</small>
                                           {this.ratingReview(30)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[30]}</p>
+                                        <p className="reviewText">{reviewsText[30]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[31]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[31]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[31]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[31]}</small>
+                                        <h5 className="reviewName">{reviewsName[31]}
+                                          <small className="reviewTime"> {reviewsTime[31]}</small>
                                           {this.ratingReview(31)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[31]}</p>
+                                        <p className="reviewText">{reviewsText[31]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[32]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[32]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[32]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[32]}</small>
+                                        <h5 className="reviewName">{reviewsName[32]}
+                                          <small className="reviewTime"> {reviewsTime[32]}</small>
                                           {this.ratingReview(32)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[32]}</p>
+                                        <p className="reviewText">{reviewsText[32]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[33]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[33]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[33]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[33]}</small>
+                                        <h5 className="reviewName">{reviewsName[33]}
+                                          <small className="reviewTime"> {reviewsTime[33]}</small>
                                           {this.ratingReview(33)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[33]}</p>
+                                        <p className="reviewText">{reviewsText[33]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[34]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[34]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[34]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[34]}</small>
+                                        <h5 className="reviewName">{reviewsName[34]}
+                                          <small className="reviewTime"> {reviewsTime[34]}</small>
                                           {this.ratingReview(34)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[34]}</p>
+                                        <p className="reviewText">{reviewsText[34]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -1146,28 +1125,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[28]} />
+                              <Image className="rounded mx-auto d-block" src={images[28]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[29]} />
+                              <Image className="rounded mx-auto d-block" src={images[29]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[30]} />
+                              <Image className="rounded mx-auto d-block" src={images[30]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[31]} />
+                              <Image className="rounded mx-auto d-block" src={images[31]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgoneseven"><span className="inputTittles">name</span>{this.state.nameTitle[7]}</ListGroup.Item>
-                              <ListGroup.Item className="lgtwoseven"><span className="inputTittles">address</span>{this.state.address[7]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreeseven"><span className="inputTittles">rating</span>{this.state.rating[7]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfourseven"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[7]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfiveseven"><span className="inputTittles">phone</span>{this.state.phoneNumber[7]}</ListGroup.Item>
+                              <ListGroup.Item className="lgoneseven"><span className="inputTittles">name</span>{nameTitle[7]}</ListGroup.Item>
+                              <ListGroup.Item className="lgtwoseven"><span className="inputTittles">address</span>{address[7]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreeseven"><span className="inputTittles">rating</span>{rating[7]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfourseven"><span className="inputTittles">total ratings</span>{userRatingTotal[7]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfiveseven"><span className="inputTittles">phone</span>{phoneNumber[7]}</ListGroup.Item>
                               <ListGroup.Item className="lgsixseven">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[7]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[7]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -1191,55 +1170,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[35]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[35]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[35]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[35]}</small>
+                                        <h5 className="reviewName">{reviewsName[35]}
+                                          <small className="reviewTime"> {reviewsTime[35]}</small>
                                           {this.ratingReview(35)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[35]}</p>
+                                        <p className="reviewText">{reviewsText[35]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[36]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[36]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[36]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[36]}</small>
+                                        <h5 className="reviewName">{reviewsName[36]}
+                                          <small className="reviewTime"> {reviewsTime[36]}</small>
                                           {this.ratingReview(36)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[36]}</p>
+                                        <p className="reviewText">{reviewsText[36]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[37]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[37]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[37]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[37]}</small>
+                                        <h5 className="reviewName">{reviewsName[37]}
+                                          <small className="reviewTime"> {reviewsTime[37]}</small>
                                           {this.ratingReview(37)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[37]}</p>
+                                        <p className="reviewText">{reviewsText[37]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[38]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[38]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[38]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[38]}</small>
+                                        <h5 className="reviewName">{reviewsName[38]}
+                                          <small className="reviewTime"> {reviewsTime[38]}</small>
                                           {this.ratingReview(38)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[38]}</p>
+                                        <p className="reviewText">{reviewsText[38]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[39]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[39]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[39]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[39]}</small>
+                                        <h5 className="reviewName">{reviewsName[39]}
+                                          <small className="reviewTime"> {reviewsTime[39]}</small>
                                           {this.ratingReview(39)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[39]}</p>
+                                        <p className="reviewText">{reviewsText[39]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -1272,28 +1251,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[32]} />
+                              <Image className="rounded mx-auto d-block" src={images[32]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[33]} />
+                              <Image className="rounded mx-auto d-block" src={images[33]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[34]} />
+                              <Image className="rounded mx-auto d-block" src={images[34]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[35]} />
+                              <Image className="rounded mx-auto d-block" src={images[35]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgoneeight"><span className="inputTittles">name</span>{this.state.nameTitle[8]}</ListGroup.Item>
-                              <ListGroup.Item className="lgtwoeight"><span className="inputTittles">address</span>{this.state.address[8]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreeeight"><span className="inputTittles">rating</span>{this.state.rating[8]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfoureight"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[8]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfiveeight"><span className="inputTittles">phone</span>{this.state.phoneNumber[8]}</ListGroup.Item>
+                              <ListGroup.Item className="lgoneeight"><span className="inputTittles">name</span>{nameTitle[8]}</ListGroup.Item>
+                              <ListGroup.Item className="lgtwoeight"><span className="inputTittles">address</span>{address[8]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreeeight"><span className="inputTittles">rating</span>{rating[8]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfoureight"><span className="inputTittles">total ratings</span>{userRatingTotal[8]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfiveeight"><span className="inputTittles">phone</span>{phoneNumber[8]}</ListGroup.Item>
                               <ListGroup.Item className="lgsixeight">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[8]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[8]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -1317,55 +1296,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[40]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[40]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[40]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[40]}</small>
+                                        <h5 className="reviewName">{reviewsName[40]}
+                                          <small className="reviewTime"> {reviewsTime[40]}</small>
                                           {this.ratingReview(40)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[40]}</p>
+                                        <p className="reviewText">{reviewsText[40]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[41]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[41]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[41]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[41]}</small>
+                                        <h5 className="reviewName">{reviewsName[41]}
+                                          <small className="reviewTime"> {reviewsTime[41]}</small>
                                           {this.ratingReview(41)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[41]}</p>
+                                        <p className="reviewText">{reviewsText[41]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[42]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[42]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[42]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[42]}</small>
+                                        <h5 className="reviewName">{reviewsName[42]}
+                                          <small className="reviewTime"> {reviewsTime[42]}</small>
                                           {this.ratingReview(42)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[42]}</p>
+                                        <p className="reviewText">{reviewsText[42]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[43]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[43]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[43]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[43]}</small>
+                                        <h5 className="reviewName">{reviewsName[43]}
+                                          <small className="reviewTime"> {reviewsTime[43]}</small>
                                           {this.ratingReview(43)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[43]}</p>
+                                        <p className="reviewText">{reviewsText[43]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[44]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[44]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[44]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[44]}</small>
+                                        <h5 className="reviewName">{reviewsName[44]}
+                                          <small className="reviewTime"> {reviewsTime[44]}</small>
                                           {this.ratingReview(44)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[44]}</p>
+                                        <p className="reviewText">{reviewsText[44]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -1407,28 +1386,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[36]} />
+                              <Image className="rounded mx-auto d-block" src={images[36]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[37]} />
+                              <Image className="rounded mx-auto d-block" src={images[37]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[38]} />
+                              <Image className="rounded mx-auto d-block" src={images[38]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[39]} />
+                              <Image className="rounded mx-auto d-block" src={images[39]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgonenine"><span className="inputTittles">name</span>{this.state.nameTitle[9]}</ListGroup.Item>
-                              <ListGroup.Item className="lgtwonine"><span className="inputTittles">address</span>{this.state.address[9]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreenine"><span className="inputTittles">rating</span>{this.state.rating[9]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfournine"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[9]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfivenine"><span className="inputTittles">phone</span>{this.state.phoneNumber[9]}</ListGroup.Item>
+                              <ListGroup.Item className="lgonenine"><span className="inputTittles">name</span>{nameTitle[9]}</ListGroup.Item>
+                              <ListGroup.Item className="lgtwonine"><span className="inputTittles">address</span>{address[9]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreenine"><span className="inputTittles">rating</span>{rating[9]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfournine"><span className="inputTittles">total ratings</span>{userRatingTotal[9]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfivenine"><span className="inputTittles">phone</span>{phoneNumber[9]}</ListGroup.Item>
                               <ListGroup.Item className="lgsixnine">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[9]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[9]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -1452,55 +1431,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[45]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[45]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[45]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[45]}</small>
+                                        <h5 className="reviewName">{reviewsName[45]}
+                                          <small className="reviewTime"> {reviewsTime[45]}</small>
                                           {this.ratingReview(45)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[45]}</p>
+                                        <p className="reviewText">{reviewsText[45]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[46]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[46]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[46]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[46]}</small>
+                                        <h5 className="reviewName">{reviewsName[46]}
+                                          <small className="reviewTime"> {reviewsTime[46]}</small>
                                           {this.ratingReview(46)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[46]}</p>
+                                        <p className="reviewText">{reviewsText[46]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[47]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[47]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[47]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[47]}</small>
+                                        <h5 className="reviewName">{reviewsName[47]}
+                                          <small className="reviewTime"> {reviewsTime[47]}</small>
                                           {this.ratingReview(47)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[47]}</p>
+                                        <p className="reviewText">{reviewsText[47]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[48]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[48]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[48]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[48]}</small>
+                                        <h5 className="reviewName">{reviewsName[48]}
+                                          <small className="reviewTime"> {reviewsTime[48]}</small>
                                           {this.ratingReview(48)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[48]}</p>
+                                        <p className="reviewText">{reviewsText[48]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[49]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[49]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[49]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[49]}</small>
+                                        <h5 className="reviewName">{reviewsName[49]}
+                                          <small className="reviewTime"> {reviewsTime[49]}</small>
                                           {this.ratingReview(49)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[49]}</p>
+                                        <p className="reviewText">{reviewsText[49]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -1538,28 +1517,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[40]} />
+                              <Image className="rounded mx-auto d-block" src={images[40]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[41]} />
+                              <Image className="rounded mx-auto d-block" src={images[41]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[42]} />
+                              <Image className="rounded mx-auto d-block" src={images[42]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[43]} />
+                              <Image className="rounded mx-auto d-block" src={images[43]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgoneten"><span className="inputTittles">name</span>{this.state.nameTitle[10]}</ListGroup.Item>
-                              <ListGroup.Item className="lgtwoten"><span className="inputTittles">address</span>{this.state.address[10]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreeten"><span className="inputTittles">rating</span>{this.state.rating[10]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfourten"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[10]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfiveten"><span className="inputTittles">phone</span>{this.state.phoneNumber[10]}</ListGroup.Item>
+                              <ListGroup.Item className="lgoneten"><span className="inputTittles">name</span>{nameTitle[10]}</ListGroup.Item>
+                              <ListGroup.Item className="lgtwoten"><span className="inputTittles">address</span>{address[10]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreeten"><span className="inputTittles">rating</span>{rating[10]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfourten"><span className="inputTittles">total ratings</span>{userRatingTotal[10]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfiveten"><span className="inputTittles">phone</span>{phoneNumber[10]}</ListGroup.Item>
                               <ListGroup.Item className="lgsixten">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[10]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[10]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -1583,55 +1562,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[50]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[50]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[50]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[50]}</small>
+                                        <h5 className="reviewName">{reviewsName[50]}
+                                          <small className="reviewTime"> {reviewsTime[50]}</small>
                                           {this.ratingReview(50)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[50]}</p>
+                                        <p className="reviewText">{reviewsText[50]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[51]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[51]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[51]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[51]}</small>
+                                        <h5 className="reviewName">{reviewsName[51]}
+                                          <small className="reviewTime"> {reviewsTime[51]}</small>
                                           {this.ratingReview(51)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[51]}</p>
+                                        <p className="reviewText">{reviewsText[51]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[52]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[52]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[52]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[52]}</small>
+                                        <h5 className="reviewName">{reviewsName[52]}
+                                          <small className="reviewTime"> {reviewsTime[52]}</small>
                                           {this.ratingReview(52)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[52]}</p>
+                                        <p className="reviewText">{reviewsText[52]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[53]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[53]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[53]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[53]}</small>
+                                        <h5 className="reviewName">{reviewsName[53]}
+                                          <small className="reviewTime"> {reviewsTime[53]}</small>
                                           {this.ratingReview(53)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[53]}</p>
+                                        <p className="reviewText">{reviewsText[53]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[54]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[54]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[54]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[54]}</small>
+                                        <h5 className="reviewName">{reviewsName[54]}
+                                          <small className="reviewTime"> {reviewsTime[54]}</small>
                                           {this.ratingReview(54)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[54]}</p>
+                                        <p className="reviewText">{reviewsText[54]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -1667,28 +1646,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[44]} />
+                              <Image className="rounded mx-auto d-block" src={images[44]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[45]} />
+                              <Image className="rounded mx-auto d-block" src={images[45]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[46]} />
+                              <Image className="rounded mx-auto d-block" src={images[46]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[47]} />
+                              <Image className="rounded mx-auto d-block" src={images[47]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgoneeleven"><span className="inputTittles">name</span>{this.state.nameTitle[11]}</ListGroup.Item>
-                              <ListGroup.Item className="lgtwoeleven"><span className="inputTittles">address</span>{this.state.address[11]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreeeleven"><span className="inputTittles">rating</span>{this.state.rating[11]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfoureleven"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[11]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfiveeleven"><span className="inputTittles">phone</span>{this.state.phoneNumber[11]}</ListGroup.Item>
+                              <ListGroup.Item className="lgoneeleven"><span className="inputTittles">name</span>{nameTitle[11]}</ListGroup.Item>
+                              <ListGroup.Item className="lgtwoeleven"><span className="inputTittles">address</span>{address[11]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreeeleven"><span className="inputTittles">rating</span>{rating[11]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfoureleven"><span className="inputTittles">total ratings</span>{userRatingTotal[11]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfiveeleven"><span className="inputTittles">phone</span>{phoneNumber[11]}</ListGroup.Item>
                               <ListGroup.Item className="lgsixeleven">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[11]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[11]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -1712,55 +1691,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[55]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[55]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[55]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[55]}</small>
+                                        <h5 className="reviewName">{reviewsName[55]}
+                                          <small className="reviewTime"> {reviewsTime[55]}</small>
                                           {this.ratingReview(55)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[55]}</p>
+                                        <p className="reviewText">{reviewsText[55]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[56]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[56]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[56]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[56]}</small>
+                                        <h5 className="reviewName">{reviewsName[56]}
+                                          <small className="reviewTime"> {reviewsTime[56]}</small>
                                           {this.ratingReview(56)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[56]}</p>
+                                        <p className="reviewText">{reviewsText[56]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[57]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[57]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[57]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[57]}</small>
+                                        <h5 className="reviewName">{reviewsName[57]}
+                                          <small className="reviewTime"> {reviewsTime[57]}</small>
                                           {this.ratingReview(57)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[57]}</p>
+                                        <p className="reviewText">{reviewsText[57]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[58]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[58]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[58]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[58]}</small>
+                                        <h5 className="reviewName">{reviewsName[58]}
+                                          <small className="reviewTime"> {reviewsTime[58]}</small>
                                           {this.ratingReview(58)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[58]}</p>
+                                        <p className="reviewText">{reviewsText[58]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[59]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[59]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[59]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[59]}</small>
+                                        <h5 className="reviewName">{reviewsName[59]}
+                                          <small className="reviewTime"> {reviewsTime[59]}</small>
                                           {this.ratingReview(59)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[59]}</p>
+                                        <p className="reviewText">{reviewsText[59]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -1799,28 +1778,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[48]} />
+                              <Image className="rounded mx-auto d-block" src={images[48]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[49]} />
+                              <Image className="rounded mx-auto d-block" src={images[49]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[50]} />
+                              <Image className="rounded mx-auto d-block" src={images[50]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[51]} />
+                              <Image className="rounded mx-auto d-block" src={images[51]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgonetwelve"><span className="inputTittles">name</span>{this.state.nameTitle[12]}</ListGroup.Item>
-                              <ListGroup.Item className="lgtwotwelve"><span className="inputTittles">address</span>{this.state.address[12]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreetwelve"><span className="inputTittles">rating</span>{this.state.rating[12]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfourtwelve"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[12]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfivetwelve"><span className="inputTittles">phone</span>{this.state.phoneNumber[12]}</ListGroup.Item>
+                              <ListGroup.Item className="lgonetwelve"><span className="inputTittles">name</span>{nameTitle[12]}</ListGroup.Item>
+                              <ListGroup.Item className="lgtwotwelve"><span className="inputTittles">address</span>{address[12]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreetwelve"><span className="inputTittles">rating</span>{rating[12]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfourtwelve"><span className="inputTittles">total ratings</span>{userRatingTotal[12]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfivetwelve"><span className="inputTittles">phone</span>{phoneNumber[12]}</ListGroup.Item>
                               <ListGroup.Item className="lgsixtwelve">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[12]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[12]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -1844,55 +1823,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[60]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[60]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[60]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[60]}</small>
+                                        <h5 className="reviewName">{reviewsName[60]}
+                                          <small className="reviewTime"> {reviewsTime[60]}</small>
                                           {this.ratingReview(60)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[60]}</p>
+                                        <p className="reviewText">{reviewsText[60]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[61]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[61]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[61]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[61]}</small>
+                                        <h5 className="reviewName">{reviewsName[61]}
+                                          <small className="reviewTime"> {reviewsTime[61]}</small>
                                           {this.ratingReview(61)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[61]}</p>
+                                        <p className="reviewText">{reviewsText[61]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[62]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[62]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[62]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[62]}</small>
+                                        <h5 className="reviewName">{reviewsName[62]}
+                                          <small className="reviewTime"> {reviewsTime[62]}</small>
                                           {this.ratingReview(62)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[62]}</p>
+                                        <p className="reviewText">{reviewsText[62]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[63]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[63]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[63]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[63]}</small>
+                                        <h5 className="reviewName">{reviewsName[63]}
+                                          <small className="reviewTime"> {reviewsTime[63]}</small>
                                           {this.ratingReview(63)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[63]}</p>
+                                        <p className="reviewText">{reviewsText[63]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[64]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[64]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[64]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[64]}</small>
+                                        <h5 className="reviewName">{reviewsName[64]}
+                                          <small className="reviewTime"> {reviewsTime[64]}</small>
                                           {this.ratingReview(64)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[64]}</p>
+                                        <p className="reviewText">{reviewsText[64]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -1931,28 +1910,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[52]} />
+                              <Image className="rounded mx-auto d-block" src={images[52]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[53]} />
+                              <Image className="rounded mx-auto d-block" src={images[53]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[54]} />
+                              <Image className="rounded mx-auto d-block" src={images[54]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[55]} />
+                              <Image className="rounded mx-auto d-block" src={images[55]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgthreeone"><span className="inputTittles">name</span>{this.state.nameTitle[13]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreetwo"><span className="inputTittles">address</span>{this.state.address[13]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreethree"><span className="inputTittles">rating</span>{this.state.rating[13]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreefour"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[13]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreefive"><span className="inputTittles">phone</span>{this.state.phoneNumber[13]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreeone"><span className="inputTittles">name</span>{nameTitle[13]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreetwo"><span className="inputTittles">address</span>{address[13]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreethree"><span className="inputTittles">rating</span>{rating[13]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreefour"><span className="inputTittles">total ratings</span>{userRatingTotal[13]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreefive"><span className="inputTittles">phone</span>{phoneNumber[13]}</ListGroup.Item>
                               <ListGroup.Item className="lgthreesix">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[13]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[13]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -1976,55 +1955,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[65]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[65]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[65]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[65]}</small>
+                                        <h5 className="reviewName">{reviewsName[65]}
+                                          <small className="reviewTime"> {reviewsTime[65]}</small>
                                           {this.ratingReview(65)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[65]}</p>
+                                        <p className="reviewText">{reviewsText[65]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[66]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[66]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[66]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[66]}</small>
+                                        <h5 className="reviewName">{reviewsName[66]}
+                                          <small className="reviewTime"> {reviewsTime[66]}</small>
                                           {this.ratingReview(66)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[66]}</p>
+                                        <p className="reviewText">{reviewsText[66]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[67]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[67]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[67]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[67]}</small>
+                                        <h5 className="reviewName">{reviewsName[67]}
+                                          <small className="reviewTime"> {reviewsTime[67]}</small>
                                           {this.ratingReview(67)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[67]}</p>
+                                        <p className="reviewText">{reviewsText[67]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[68]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[68]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[68]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[68]}</small>
+                                        <h5 className="reviewName">{reviewsName[68]}
+                                          <small className="reviewTime"> {reviewsTime[68]}</small>
                                           {this.ratingReview(68)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[68]}</p>
+                                        <p className="reviewText">{reviewsText[68]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[69]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[69]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[69]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[69]}</small>
+                                        <h5 className="reviewName">{reviewsName[69]}
+                                          <small className="reviewTime"> {reviewsTime[69]}</small>
                                           {this.ratingReview(69)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[69]}</p>
+                                        <p className="reviewText">{reviewsText[69]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -2063,28 +2042,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[56]} />
+                              <Image className="rounded mx-auto d-block" src={images[56]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[57]} />
+                              <Image className="rounded mx-auto d-block" src={images[57]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[58]} />
+                              <Image className="rounded mx-auto d-block" src={images[58]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[59]} />
+                              <Image className="rounded mx-auto d-block" src={images[59]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgthreeseven"><span className="inputTittles">name</span>{this.state.nameTitle[14]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreeeight"><span className="inputTittles">address</span>{this.state.address[14]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreenine"><span className="inputTittles">rating</span>{this.state.rating[14]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreeten"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[14]}</ListGroup.Item>
-                              <ListGroup.Item className="lgthreeeleven"><span className="inputTittles">phone</span>{this.state.phoneNumber[14]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreeseven"><span className="inputTittles">name</span>{nameTitle[14]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreeeight"><span className="inputTittles">address</span>{address[14]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreenine"><span className="inputTittles">rating</span>{rating[14]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreeten"><span className="inputTittles">total ratings</span>{userRatingTotal[14]}</ListGroup.Item>
+                              <ListGroup.Item className="lgthreeeleven"><span className="inputTittles">phone</span>{phoneNumber[14]}</ListGroup.Item>
                               <ListGroup.Item className="lgthreetwelve">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[14]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[14]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -2108,55 +2087,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[70]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[70]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[70]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[70]}</small>
+                                        <h5 className="reviewName">{reviewsName[70]}
+                                          <small className="reviewTime"> {reviewsTime[70]}</small>
                                           {this.ratingReview(70)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[70]}</p>
+                                        <p className="reviewText">{reviewsText[70]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[71]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[71]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[71]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[71]}</small>
+                                        <h5 className="reviewName">{reviewsName[71]}
+                                          <small className="reviewTime"> {reviewsTime[71]}</small>
                                           {this.ratingReview(71)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[71]}</p>
+                                        <p className="reviewText">{reviewsText[71]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[72]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[72]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[72]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[72]}</small>
+                                        <h5 className="reviewName">{reviewsName[72]}
+                                          <small className="reviewTime"> {reviewsTime[72]}</small>
                                           {this.ratingReview(72)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[72]}</p>
+                                        <p className="reviewText">{reviewsText[72]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[73]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[73]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[73]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[73]}</small>
+                                        <h5 className="reviewName">{reviewsName[73]}
+                                          <small className="reviewTime"> {reviewsTime[73]}</small>
                                           {this.ratingReview(73)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[73]}</p>
+                                        <p className="reviewText">{reviewsText[73]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[74]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[74]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[74]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[74]}</small>
+                                        <h5 className="reviewName">{reviewsName[74]}
+                                          <small className="reviewTime"> {reviewsTime[74]}</small>
                                           {this.ratingReview(74)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[74]}</p>
+                                        <p className="reviewText">{reviewsText[74]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -2198,28 +2177,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[60]} />
+                              <Image className="rounded mx-auto d-block" src={images[60]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[61]} />
+                              <Image className="rounded mx-auto d-block" src={images[61]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[62]} />
+                              <Image className="rounded mx-auto d-block" src={images[62]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[63]} />
+                              <Image className="rounded mx-auto d-block" src={images[63]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgfourone"><span className="inputTittles">name</span>{this.state.nameTitle[15]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfourtwo"><span className="inputTittles">address</span>{this.state.address[15]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfourthree"><span className="inputTittles">rating</span>{this.state.rating[15]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfourfour"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[15]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfourfive"><span className="inputTittles">phone</span>{this.state.phoneNumber[15]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfourone"><span className="inputTittles">name</span>{nameTitle[15]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfourtwo"><span className="inputTittles">address</span>{address[15]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfourthree"><span className="inputTittles">rating</span>{rating[15]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfourfour"><span className="inputTittles">total ratings</span>{userRatingTotal[15]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfourfive"><span className="inputTittles">phone</span>{phoneNumber[15]}</ListGroup.Item>
                               <ListGroup.Item className="lgfoursix">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[15]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[15]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -2243,55 +2222,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[75]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[75]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[75]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[75]}</small>
+                                        <h5 className="reviewName">{reviewsName[75]}
+                                          <small className="reviewTime"> {reviewsTime[75]}</small>
                                           {this.ratingReview(75)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[75]}</p>
+                                        <p className="reviewText">{reviewsText[75]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[76]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[76]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[76]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[76]}</small>
+                                        <h5 className="reviewName">{reviewsName[76]}
+                                          <small className="reviewTime"> {reviewsTime[76]}</small>
                                           {this.ratingReview(76)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[76]}</p>
+                                        <p className="reviewText">{reviewsText[76]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[77]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[77]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[77]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[77]}</small>
+                                        <h5 className="reviewName">{reviewsName[77]}
+                                          <small className="reviewTime"> {reviewsTime[77]}</small>
                                           {this.ratingReview(77)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[77]}</p>
+                                        <p className="reviewText">{reviewsText[77]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[78]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[78]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[78]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[78]}</small>
+                                        <h5 className="reviewName">{reviewsName[78]}
+                                          <small className="reviewTime"> {reviewsTime[78]}</small>
                                           {this.ratingReview(78)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[78]}</p>
+                                        <p className="reviewText">{reviewsText[78]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[79]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[79]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[79]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[79]}</small>
+                                        <h5 className="reviewName">{reviewsName[79]}
+                                          <small className="reviewTime"> {reviewsTime[79]}</small>
                                           {this.ratingReview(79)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[79]}</p>
+                                        <p className="reviewText">{reviewsText[79]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -2329,28 +2308,28 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[64]} />
+                              <Image className="rounded mx-auto d-block" src={images[64]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[65]} />
+                              <Image className="rounded mx-auto d-block" src={images[65]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[66]} />
+                              <Image className="rounded mx-auto d-block" src={images[66]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[67]} />
+                              <Image className="rounded mx-auto d-block" src={images[67]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgfourseven"><span className="inputTittles">name</span>{this.state.nameTitle[16]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfoureight"><span className="inputTittles">address</span>{this.state.address[16]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfournine"><span className="inputTittles">rating</span>{this.state.rating[16]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfourten"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[16]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfoureleven"><span className="inputTittles">phone</span>{this.state.phoneNumber[16]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfourseven"><span className="inputTittles">name</span>{nameTitle[16]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfoureight"><span className="inputTittles">address</span>{address[16]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfournine"><span className="inputTittles">rating</span>{rating[16]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfourten"><span className="inputTittles">total ratings</span>{userRatingTotal[16]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfoureleven"><span className="inputTittles">phone</span>{phoneNumber[16]}</ListGroup.Item>
                               <ListGroup.Item className="lgfourtwelve">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[16]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[16]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -2374,55 +2353,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[80]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[80]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[80]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[80]}</small>
+                                        <h5 className="reviewName">{reviewsName[80]}
+                                          <small className="reviewTime"> {reviewsTime[80]}</small>
                                           {this.ratingReview(80)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[80]}</p>
+                                        <p className="reviewText">{reviewsText[80]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[81]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[81]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[81]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[81]}</small>
+                                        <h5 className="reviewName">{reviewsName[81]}
+                                          <small className="reviewTime"> {reviewsTime[81]}</small>
                                           {this.ratingReview(81)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[81]}</p>
+                                        <p className="reviewText">{reviewsText[81]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[82]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[82]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[82]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[82]}</small>
+                                        <h5 className="reviewName">{reviewsName[82]}
+                                          <small className="reviewTime"> {reviewsTime[82]}</small>
                                           {this.ratingReview(82)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[82]}</p>
+                                        <p className="reviewText">{reviewsText[82]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[83]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[83]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[83]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[83]}</small>
+                                        <h5 className="reviewName">{reviewsName[83]}
+                                          <small className="reviewTime"> {reviewsTime[83]}</small>
                                           {this.ratingReview(83)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[83]}</p>
+                                        <p className="reviewText">{reviewsText[83]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[84]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[84]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[84]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[84]}</small>
+                                        <h5 className="reviewName">{reviewsName[84]}
+                                          <small className="reviewTime"> {reviewsTime[84]}</small>
                                           {this.ratingReview(84)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[84]}</p>
+                                        <p className="reviewText">{reviewsText[84]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
@@ -2456,25 +2435,25 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[68]} />
+                              <Image className="rounded mx-auto d-block" src={images[68]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[69]} />
+                              <Image className="rounded mx-auto d-block" src={images[69]} />
                             </Carousel.Item>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={this.state.images[70]} />
+                              <Image className="rounded mx-auto d-block" src={images[70]} />
                             </Carousel.Item>
                           </Carousel>
 
                           <Card.Body>
                             <ListGroup>
-                              <ListGroup.Item className="lgfiveseven"><span className="inputTittles">name</span>{this.state.nameTitle[17]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfiveeight"><span className="inputTittles">address</span>{this.state.address[17]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfivenine"><span className="inputTittles">rating</span>{this.state.rating[17]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfiveten"><span className="inputTittles">total ratings</span>{this.state.userRatingTotal[17]}</ListGroup.Item>
-                              <ListGroup.Item className="lgfiveeleven"><span className="inputTittles">phone</span>{this.state.phoneNumber[17]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfiveseven"><span className="inputTittles">name</span>{nameTitle[17]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfiveeight"><span className="inputTittles">address</span>{address[17]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfivenine"><span className="inputTittles">rating</span>{rating[17]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfiveten"><span className="inputTittles">total ratings</span>{userRatingTotal[17]}</ListGroup.Item>
+                              <ListGroup.Item className="lgfiveeleven"><span className="inputTittles">phone</span>{phoneNumber[17]}</ListGroup.Item>
                               <ListGroup.Item className="lgfivetwelve">
-                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={this.state.website[17]} >Website</Button>
+                                <Button className="inputButtons" rel="noopener noreferrer" target="_blank" href={website[17]} >Website</Button>
                               </ListGroup.Item>
 
                             </ListGroup>
@@ -2498,55 +2477,55 @@ export default class GenerateBuildings extends React.Component {
                                 <Tab.Pane eventKey="first">
                                   <ul className="list-unstyled">
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[85]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[85]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[85]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[85]}</small>
+                                        <h5 className="reviewName">{reviewsName[85]}
+                                          <small className="reviewTime"> {reviewsTime[85]}</small>
                                           {this.ratingReview(85)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[85]}</p>
+                                        <p className="reviewText">{reviewsText[85]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[86]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[86]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[86]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[86]}</small>
+                                        <h5 className="reviewName">{reviewsName[86]}
+                                          <small className="reviewTime"> {reviewsTime[86]}</small>
                                           {this.ratingReview(86)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[86]}</p>
+                                        <p className="reviewText">{reviewsText[86]}</p>
                                       </Media.Body>
                                     </Media>
 
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[87]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[87]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[87]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[87]}</small>
+                                        <h5 className="reviewName">{reviewsName[87]}
+                                          <small className="reviewTime"> {reviewsTime[87]}</small>
                                           {this.ratingReview(87)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[87]}</p>
+                                        <p className="reviewText">{reviewsText[87]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[88]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[88]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[88]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[88]}</small>
+                                        <h5 className="reviewName">{reviewsName[88]}
+                                          <small className="reviewTime"> {reviewsTime[88]}</small>
                                           {this.ratingReview(88)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[88]}</p>
+                                        <p className="reviewText">{reviewsText[88]}</p>
                                       </Media.Body>
                                     </Media>
                                     <Media as="li">
-                                      <img width={50} height={50} className="mr-3" src={this.state.reviewsPhoto[89]} alt="Profile" />
+                                      <img width={50} height={50} className="mr-3" src={reviewsPhoto[89]} alt="Profile" />
                                       <Media.Body>
-                                        <h5 className="reviewName">{this.state.reviewsName[89]}
-                                          <small className="reviewTime"> {this.state.reviewsTime[89]}</small>
+                                        <h5 className="reviewName">{reviewsName[89]}
+                                          <small className="reviewTime"> {reviewsTime[89]}</small>
                                           {this.ratingReview(89)}
                                         </h5>
-                                        <p className="reviewText">{this.state.reviewsText[89]}</p>
+                                        <p className="reviewText">{reviewsText[89]}</p>
                                       </Media.Body>
                                     </Media>
                                   </ul>
