@@ -30,16 +30,31 @@ export default class GenerateBuildings extends React.Component {
   }
 
   getPlaces = async (latitude, longitude) => {
-    const api_call = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1000&key=${API_KEY}`);
-    const data = await api_call.json();
+    const api_callCafe = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=cafe&key=${API_KEY}`);
+    const dataCafe = await api_callCafe.json();
+
+    const api_callRestaurant = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=restaurant&key=${API_KEY}`);
+    const dataRestaurant = await api_callRestaurant.json();
+
+    const api_callBar = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=bar&key=${API_KEY}`);
+    const databar = await api_callBar.json();
+
 
     let arrayPlaceIds = [];
     let api_Details = [];
     let DeData = [];
     let arrayImageCodes = [];
 
-    for (let i = 0; i <= data.results.length - 2; i++) {
-      arrayPlaceIds.push(data.results[i + 1].place_id);
+    for (let plc = 0; plc <= 17; plc++) {
+      //Cofe push
+      arrayPlaceIds.push(dataCafe.results[plc].place_id);
+      //Restorant push
+      arrayPlaceIds.push(dataRestaurant.results[plc].place_id);
+      //Bar push
+      arrayPlaceIds.push(databar.results[plc].place_id); 
+    }
+    for (let i = 0; i <= 18; i++) {
+
       api_Details = await fetch(`/maps/api/place/details/json?place_id=${arrayPlaceIds[i]}&key=${API_KEY}`);
       DeData = await api_Details.json();
 
@@ -71,7 +86,10 @@ export default class GenerateBuildings extends React.Component {
           y++;
         }
       }
+     
     }
+    console.log(arrayPlaceIds);
+    console.log(nameTitle)
     for (let g = 0; g <= arrayImageCodes.length; g++) {
       images.push('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=' + arrayImageCodes[g] + '&key=' + API_KEY);
     }
