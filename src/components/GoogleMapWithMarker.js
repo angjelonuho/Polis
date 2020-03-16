@@ -29,7 +29,7 @@ class GoogleMapComp extends Component {
   }
 
   renderMap = () => {
-    loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyD8k5qUSvlHzgITZ4o1icvEgpMromP4s2c&callback=initMap")
+    loadScript("/maps/api/js?key=AIzaSyD8k5qUSvlHzgITZ4o1icvEgpMromP4s2c&callback=initMap")
     window.initMap = this.initMap
   }
 
@@ -37,7 +37,7 @@ class GoogleMapComp extends Component {
   initMap = () => {
     let he = this.state.latitude;
     let hi = this.state.longitude;
-    let map = new window.google.maps.Map(document.getElementById('map'), {
+    new window.google.maps.Map(document.getElementById('map'), {
       center: {lat: he, lng: hi},
       zoom: 14,
       styles: mapStyle,

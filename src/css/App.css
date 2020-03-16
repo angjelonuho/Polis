@@ -150,6 +150,7 @@
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   display: -webkit-box;
+  width: 100%;
   display: inline-block;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -189,6 +190,8 @@
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   background-color:white;
+  min-height: 100% !important;
+
   /* background-image: radial-gradient( circle 328px at 2.9% 15%,  rgba(191,224,251,1) 0%, rgba(232,233,251,1) 25.8%, rgba(252,239,250,1) 50.8%, rgba(234,251,251,1) 77.6%, rgba(240,251,244,1) 100.7% ); */
   
 }
@@ -244,7 +247,7 @@
   left: 52%;
   margin: 120px auto;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(5%, #f2f9fe), to(#d6f0fd));
-  background: linear-gradient(top, #f2f9fe 5%, #d6f0fd 100%);
+  background: linear-gradient(to top, #f2f9fe 5%, #d6f0fd 100%);
   box-shadow: -10px 10px 10px 1px rgba(0, 0, 0, 0.4);
   -webkit-animation: cloud-move 1000s linear infinite;
   animation: cloud-move 1000s linear infinite;
@@ -967,7 +970,7 @@ background-color: #d8d8d8;
 /* Handle */
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: linear-gradient(left, #fff, #e4e4e4);
+  background: linear-gradient(to left, #fff, #e4e4e4);
   border: 1px solid #aaa;
 }
 
@@ -978,3 +981,14 @@ background-color: #d8d8d8;
 
 /**  STYLE 10 */
 
+.lblexh{
+  margin: 0 !important;
+}
+.ttlexh{
+  font-size: 36px;
+  font-family: "Montserrat";
+  font-weight: 600;
+  color: #718473;
+  text-transform: uppercase;
+
+}

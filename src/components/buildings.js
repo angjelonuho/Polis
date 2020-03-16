@@ -45,7 +45,7 @@ export default class GenerateBuildings extends React.Component {
     let DeData = [];
     let arrayImageCodes = [];
 
-    for (let plc = 0; plc <= 17; plc++) {
+    for (let plc = 0; plc <= 5; plc++) {
       //Cofe push
       arrayPlaceIds.push(dataCafe.results[plc].place_id);
       //Restorant push
@@ -53,7 +53,7 @@ export default class GenerateBuildings extends React.Component {
       //Bar push
       arrayPlaceIds.push(databar.results[plc].place_id); 
     }
-    for (let i = 0; i <= 18; i++) {
+    for (let i = 0; i <= 17; i++) {
 
       api_Details = await fetch(`/maps/api/place/details/json?place_id=${arrayPlaceIds[i]}&key=${API_KEY}`);
       DeData = await api_Details.json();
@@ -88,10 +88,8 @@ export default class GenerateBuildings extends React.Component {
       }
      
     }
-    console.log(arrayPlaceIds);
-    console.log(nameTitle)
     for (let g = 0; g <= arrayImageCodes.length; g++) {
-      images.push('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=' + arrayImageCodes[g] + '&key=' + API_KEY);
+      images.push('/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=' + arrayImageCodes[g] + '&key=' + API_KEY);
     }
 
   }

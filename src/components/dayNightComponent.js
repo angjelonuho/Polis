@@ -1,5 +1,8 @@
 import React from 'react';
 import LocationWeather from './weatherAndLocation';
+import Exchange from './exchangeComponent';
+
+
 
 export default class DayNight extends React.Component {
   constructor(props) {
@@ -99,6 +102,9 @@ export default class DayNight extends React.Component {
             <div className="col-auto">
               <LocationWeather />
             </div>
+            <div className="col-auto">
+                <Exchange />
+            </div>
           </div>
         </div>
         <this.toggleDay />
@@ -114,6 +120,9 @@ export default class DayNight extends React.Component {
               </div>
               <div className="col-auto">
                 <LocationWeather />
+              </div>
+              <div className="col-auto">
+                <Exchange />
               </div>
             </div>
           </div>
