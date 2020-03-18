@@ -94,21 +94,21 @@ export default class DayNight extends React.Component {
       return (
 
         <div>
-        <div className="container leftside">
-          <div className="row">
-            <div className="col flex-grow-0">
-              {this.clock()}
-            </div>
-            <div className="col-auto">
-              <LocationWeather />
-            </div>
-            <div className="col-auto">
+          <div className="container leftside">
+            <div className="row">
+              <div className="col flex-grow-0">
+                {this.clock()}
+              </div>
+              <div className="col-auto">
+                <LocationWeather />
+              </div>
+              <div className="col-auto">
                 <Exchange />
+              </div>
             </div>
           </div>
+          <this.toggleDay />
         </div>
-        <this.toggleDay />
-      </div>
       );
     } else {
       return (

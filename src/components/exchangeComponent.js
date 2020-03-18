@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
-import { Form, Col } from 'react-bootstrap';
-
-
-
 
 class Exchange extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            amount: 1,
+            result: 0,
 
-    state = {
+            fromCurrency: "USD",
+            toCurrency: "EUR",
 
-        amount: 1,
-        result: 0,
+            currencies: [],
+        };
 
-        fromCurrency: "USD",
-        toCurrency: "EUR",
-
-        currencies: [],
-
-    };
+    }
 
     componentDidMount() {
+
         fetch("/latest")
             .then(response => {
                 return response.json();
@@ -33,12 +31,9 @@ class Exchange extends Component {
             .catch(err => {
                 console.log("Opps", err.message);
             });
-
-        this.convertHandler(); //to initialize value before load 
-
     };
 
-    convertHandler = () => {
+    componentDidUpdate() {
 
         fetch(`/latest?base=${this.state.fromCurrency}&symbols=${this.state.toCurrency}`)
             .then(response => {
@@ -54,22 +49,19 @@ class Exchange extends Component {
 
     };
 
-    selectHandler = (event) => {
-        if (event.target.name === "from") {
+    handleInputChange = (event) => {
+
+        if (event.target.name === 'from') {
             this.setState({ fromCurrency: event.target.value });
         }
-        if (event.target.name === "to") {
+        if (event.target.name === 'to') {
             this.setState({ toCurrency: event.target.value });
         }
-        this.convertHandler();
-        
-    };
+        if (event.target.name === 'amount') {
+            this.setState({ amount: event.target.value });
+        }
 
-    handleChange = (event) => {
-        this.setState({amount: event.target.value});
-        this.convertHandler();
     };
-
 
     render() {
 
@@ -81,38 +73,48 @@ class Exchange extends Component {
 
             <div className="container cityNameInfo">
                 <div className="row p-3">
-                    <h2 className="ttlexh">Exchange rate</h2>
+                    <div className="col moneyCol"><img src="https://media.giphy.com/media/KDInXCxJOL9gb5cwgR/giphy.gif" className="moneyGif" alt="E" /></div>
+                    <div className="col moneyCol"><img src="https://media.giphy.com/media/3gVqQCCJXP6N7FfRWo/giphy.gif" className="moneyGif" alt="X" /></div>
+                    <div className="col moneyCol"><img src="https://media.giphy.com/media/2wV4aE4oo71xKirjqv/giphy.gif" className="moneyGif" alt="C" /></div>
+                    <div className="col moneyCol"><img src="https://media.giphy.com/media/ZeKFkPdbSIxJbtkbRA/giphy.gif" className="moneyGif" alt="H" /></div>
+                    <div className="col moneyCol"><img src="https://media.giphy.com/media/ZbBGqbg4RgjGc3z75K/giphy.gif" className="moneyGif" alt="A" /></div>
+                    <div className="col moneyCol"><img src="https://media.giphy.com/media/XgSMToclOmnuXd7Ho4/giphy.gif" className="moneyGif" alt="N" /></div>
+                    <div className="col moneyCol"><img src="https://media.giphy.com/media/ln0TUwW3MlFahfSF5J/giphy.gif" className="moneyGif" alt="G" /></div>
+                    <div className="col moneyCol"><img src="https://media.giphy.com/media/fLpOPkumtoO0s4UkSi/giphy.gif" className="moneyGif" alt="E" /></div>
                 </div>
                 <div className="row p-3">
-                    <Form >
-                        <Form.Row>
-                            <Form.Group controlId="formGridAddress2">
-                                <Form.Label> </Form.Label>
-                                <Form.Control autoComplete="off" name="amount" value={this.state.amount}  onChange={event => this.handleChange(event)} />
-                            </Form.Group>
-                            <Form.Group as={Col} controlId="formGridState">
-                                <Form.Label className="lblexh">From</Form.Label>
-                                <Form.Control name="from" as="select" value={this.state.fromCurrency}  onChange={event => this.selectHandler(event)}>
-                                    {dropdownItems}
-                                </Form.Control>
-                            </Form.Group>
-                        </Form.Row>
-                        <Form.Row>
-                            <Form.Group controlId="formGridAddress2">
-                                <Form.Label> </Form.Label>
-                                <Form.Control placeholder="?" value={this.state.result} onChange={event => this.handleChange(event)} readOnly/>
-                            </Form.Group>
-                            <Form.Group as={Col} controlId="formGridState">
-                                <Form.Label className="lblexh">To</Form.Label>
-                                <Form.Control name="to" as="select"  value={this.state.toCurrency} onChange={event => this.selectHandler(event)}>
-                                    {dropdownItems}
-                                </Form.Control>
-                            </Form.Group>
+                    <form>
 
-                        </Form.Row>
-                    </Form>
+                        <div className="form-row">
+                            <div className="form-group">
+                                <label htmlFor="amount"></label>
+                                <input type="text" className="form-control" autoComplete="off" name="amount" value={this.state.amount} onChange={this.handleInputChange} />
+                            </div>
+                            <div className="form-group col">
+                                <label htmlFor="from" className="lblexh">From</label>
+                                <select className="form-control" name="from" as="select" value={this.state.fromCurrency} onChange={this.handleInputChange}>
+                                    {dropdownItems}
+                                </select>
+                            </div>
+                        </div>
+                        <div className="form-row">
+                            <div className="form-group">
+                                <label htmlFor="result"></label>
+                                <input type="text" className="form-control" placeholder="?" value={this.state.result} onChange={this.handleInputChange} readOnly />
+                            </div>
+                            <div className="form-group col">
+                                <label htmlFor="to" className="lblexh">To</label>
+                                <select className="form-control" name="to" as="select" value={this.state.toCurrency} onChange={this.handleInputChange}>
+                                    {dropdownItems}
+                                </select>
+                            </div>
+                        </div>
+                    </form>
 
                 </div>
+
+
+
 
             </div>
         )
