@@ -18,38 +18,63 @@ class Exchange extends Component {
     componentDidMount() {
 
         fetch("/latest")
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                const currencyAr = ["EUR"]
-                for (const key in data.rates) {
-                    currencyAr.push(key)
+
+            .then(
+                response => {
+                    if (response.status !== 200) {
+                        console.log('Looks like there was a problem. Status Code: ' +
+                            response.status);
+                        return;  
+                    }
+
+                    response.json().then(data => {
+                        const currencyAr = ["EUR"]
+                        for (const key in data.rates) {
+                            currencyAr.push(key)
+                        }
+                        this.setState({ currencies: currencyAr.sort() })
+                    })
                 }
-                this.setState({ currencies: currencyAr.sort() })
-            })
-            .catch(err => {
-                console.log("Opps", err.message);
+            )
+            .catch(function (err) {
+                console.log('Fetch Error :-S', err);
             });
+
+        this.convertFetch();
     };
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
+
+        if (this.state.amount !== prevState.amount || this.state.fromCurrency !== prevState.fromCurrency || this.state.toCurrency !== prevState.toCurrency) {
+            this.convertFetch();
+        };
+    };
+
+    convertFetch = () => {
 
         fetch(`/latest?base=${this.state.fromCurrency}&symbols=${this.state.toCurrency}`)
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                const result = this.state.amount * (data.rates[this.state.toCurrency]);
-                this.setState({ result: result.toFixed(2) })
-            })
-            .catch(err => {
-                console.log("Opps", err.message);
+            .then(
+                response => {
+                    if (response.status !== 200) {
+                        console.log('Looks like there was a problem. Status Code: ' +
+                            response.status);
+                        return;
+                    }
+
+                    response.json().then(data => {
+                        let rates = data.rates[this.state.toCurrency];
+                        let result = this.state.amount * rates;
+                        this.setState({ result: result.toFixed(2) });
+                    })
+                }
+            )
+            .catch(function (err) {
+                console.log('Fetch Error :-S', err);
             });
 
     };
 
-    handleInputChange = (event) => {
+    handleInputChange = event => {
 
         if (event.target.name === 'from') {
             this.setState({ fromCurrency: event.target.value });
@@ -112,10 +137,6 @@ class Exchange extends Component {
                     </form>
 
                 </div>
-
-
-
-
             </div>
         )
     }

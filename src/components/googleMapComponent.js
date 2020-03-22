@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {getPosition} from './weatherLocationComponent';
 
 const mapStyle = require('../mapStyles/GoogleMapStyles.json');
 
@@ -10,7 +11,7 @@ class GoogleMapComp extends Component {
   }
 
   componentDidMount(){
-    this.getPosition()
+    getPosition()
     .then((position) => {
       this.setState({
         latitude :position.coords.latitude, 
@@ -20,12 +21,6 @@ class GoogleMapComp extends Component {
       this.setState({ errorMessage: err.message });
     });
     this.renderMap();
-  }
-
-  getPosition = () => {
-    return new Promise(function (resolve, reject) {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
-    });
   }
 
   renderMap = () => {

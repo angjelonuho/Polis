@@ -4,9 +4,16 @@ import SunsetIcon from '../img/icons/sunset.svg';
 import DropletIcon from '../img/icons/droplet.svg';
 import WindIcon from '../img/icons/wind.svg';
 
-// const API_KEY = '67b51a761ab09981501241df566ec5c4';
 const API_KEY = '91b79a55a6049ceee9a969e62cf40f04';
-export default class LocationWeather extends React.Component {
+
+//ASK user for geographic position
+export function getPosition(){
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+}
+
+class LocationWeather extends React.Component {
 
   state = {
     lat: undefined,
@@ -23,12 +30,6 @@ export default class LocationWeather extends React.Component {
     droplet: undefined,
     wind: undefined,
     errorMessage: undefined
-  }
-
-  getPosition = () => {
-    return new Promise(function (resolve, reject) {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
-    });
   }
 
   getWeather = async (latitude, longitude) => {
@@ -71,7 +72,7 @@ export default class LocationWeather extends React.Component {
   }
 
   componentDidMount() {
-    this.getPosition()
+    getPosition()
       .then((position) => {
         this.getWeather(position.coords.latitude, position.coords.longitude)
       })
@@ -138,3 +139,6 @@ export default class LocationWeather extends React.Component {
   }
 
 }
+
+export default LocationWeather;
+

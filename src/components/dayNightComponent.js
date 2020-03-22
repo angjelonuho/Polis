@@ -1,5 +1,5 @@
 import React from 'react';
-import LocationWeather from './weatherAndLocation';
+import LocationWeather from './weatherLocationComponent';
 import Exchange from './exchangeComponent';
 
 

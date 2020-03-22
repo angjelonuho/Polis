@@ -1,5 +1,7 @@
 import React from 'react';
+import {getPosition} from './weatherLocationComponent';
 import { Modal, Image, Container, Row, Col, Carousel, Tab, Nav, Card, Button, Media, ListGroup } from 'react-bootstrap';
+
 
 const API_KEY = 'AIzaSyD8k5qUSvlHzgITZ4o1icvEgpMromP4s2c';
 
@@ -23,13 +25,19 @@ export default class GenerateBuildings extends React.Component {
 
   state = { showModal: false }
 
-  getPosition = () => {
-    return new Promise(function (resolve, reject) {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
-    });
+  componentDidMount() {
+    getPosition()
+      .then((position) => {
+        this.getPlaces(position.coords.latitude, position.coords.longitude);
+      })
+      .catch((err) => {
+        this.setState({ errorMessage: err.message });
+      });
   }
 
   getPlaces = async (latitude, longitude) => {
+
+    
     const api_callCafe = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=cafe&key=${API_KEY}`);
     const dataCafe = await api_callCafe.json();
 
@@ -51,7 +59,7 @@ export default class GenerateBuildings extends React.Component {
       //Restorant push
       arrayPlaceIds.push(dataRestaurant.results[plc].place_id);
       //Bar push
-      arrayPlaceIds.push(databar.results[plc].place_id); 
+      arrayPlaceIds.push(databar.results[plc].place_id);
     }
     for (let i = 0; i <= 17; i++) {
 
@@ -86,7 +94,7 @@ export default class GenerateBuildings extends React.Component {
           y++;
         }
       }
-     
+
     }
     for (let g = 0; g <= arrayImageCodes.length; g++) {
       images.push('/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=' + arrayImageCodes[g] + '&key=' + API_KEY);
@@ -95,7 +103,7 @@ export default class GenerateBuildings extends React.Component {
   }
 
 
-  ratingReview(reviewNumb) {
+  ratingReview = reviewNumb => {
 
     let stars;
 
@@ -168,15 +176,6 @@ export default class GenerateBuildings extends React.Component {
 
 
 
-  componentDidMount() {
-    this.getPosition()
-      .then((position) => {
-        this.getPlaces(position.coords.latitude, position.coords.longitude);
-      })
-      .catch((err) => {
-        this.setState({ errorMessage: err.message });
-      });
-  }
 
 
   render() {

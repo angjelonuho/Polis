@@ -1,8 +1,8 @@
 import React from 'react';
 import './css/App.css';
 import DayNight from './components/dayNightComponent';
-import GenerateBuildings from './components/buildings';
-import GoogleMapComp from './components/GoogleMapWithMarker';
+import GenerateBuildings from './components/buildingsPlacesComponent';
+import GoogleMapComp from './components/googleMapComponent';
 
 
 function App() {
