@@ -3,6 +3,8 @@ import {getPosition} from './weatherLocationComponent';
 
 const mapStyle = require('../mapStyles/GoogleMapStyles.json');
 
+const API_KEY = 'AIzaSyCQLjfkj64FJWB0-wH50w-QlJsKVsAPlfY';
+
 class GoogleMapComp extends Component {
 
   state = {
@@ -24,7 +26,7 @@ class GoogleMapComp extends Component {
   }
 
   renderMap = () => {
-    loadScript("/maps/api/js?key=AIzaSyD8k5qUSvlHzgITZ4o1icvEgpMromP4s2c&callback=initMap")
+    loadScript(`/maps/api/js?key=${API_KEY}&callback=initMap`)
     window.initMap = this.initMap
   }
 

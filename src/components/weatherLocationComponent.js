@@ -4,7 +4,7 @@ import SunsetIcon from '../img/icons/sunset.svg';
 import DropletIcon from '../img/icons/droplet.svg';
 import WindIcon from '../img/icons/wind.svg';
 
-const API_KEY = '91b79a55a6049ceee9a969e62cf40f04';
+const API_KEY = '67b51a761ab09981501241df566ec5c4';
 
 //ASK user for geographic position
 export function getPosition(){

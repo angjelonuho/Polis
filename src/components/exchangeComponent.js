@@ -16,15 +16,27 @@ class Exchange extends Component {
     }
 
     componentDidMount() {
+        this.fetchDropdownCurr();
+        this.convertFetch();
+    };
 
-        fetch("/latest")
+    componentDidUpdate(prevProps, prevState) {
+
+        if (this.state.amount !== prevState.amount || this.state.fromCurrency !== prevState.fromCurrency || this.state.toCurrency !== prevState.toCurrency) {
+            this.convertFetch();
+        };
+    };
+
+    fetchDropdownCurr = async () => {
+
+        await fetch("/latest")
 
             .then(
                 response => {
                     if (response.status !== 200) {
                         console.log('Looks like there was a problem. Status Code: ' +
                             response.status);
-                        return;  
+                        return;
                     }
 
                     response.json().then(data => {
@@ -39,20 +51,11 @@ class Exchange extends Component {
             .catch(function (err) {
                 console.log('Fetch Error :-S', err);
             });
+    }
 
-        this.convertFetch();
-    };
+    convertFetch = async () => {
 
-    componentDidUpdate(prevProps, prevState) {
-
-        if (this.state.amount !== prevState.amount || this.state.fromCurrency !== prevState.fromCurrency || this.state.toCurrency !== prevState.toCurrency) {
-            this.convertFetch();
-        };
-    };
-
-    convertFetch = () => {
-
-        fetch(`/latest?base=${this.state.fromCurrency}&symbols=${this.state.toCurrency}`)
+        await fetch(`/latest?base=${this.state.fromCurrency}&symbols=${this.state.toCurrency}`)
             .then(
                 response => {
                     if (response.status !== 200) {
