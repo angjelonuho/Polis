@@ -16,10 +16,8 @@ import Media from 'react-bootstrap/Media';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 
+const API_KEY = 'AIzaSyDayFhaalLtdI4xW1DzP2SSPFU3jXHvEOw';
 
-
-
-const API_KEY = 'AIzaSyCQLjfkj64FJWB0-wH50w-QlJsKVsAPlfY';
 
 //Place details
 const nameTitle = [];
@@ -37,6 +35,8 @@ const reviewsRating = [];
 const reviewsTime = [];
 const reviewsText = [];
 
+
+
 export default class GenerateBuildings extends React.Component {
 
   constructor(props) {
@@ -44,8 +44,8 @@ export default class GenerateBuildings extends React.Component {
     this.state = {
       showModal1: false,
       showModal2: false,
-      showmodal3: false,
-      showmodal4: false,
+      showModal3: false,
+      showModal4: false,
       showModal5: false,
       showModal6: false,
       showModal7: false,
@@ -59,26 +59,27 @@ export default class GenerateBuildings extends React.Component {
       showModal15: false,
       showModal16: false,
       showModal17: false,
-      showModal18: false
+      showModal18: false,
 
     };
 
   }
 
-  componentDidMount() {
-
+  coordinates = () => {
     getPosition()
-      .then(position => {
-        this.getPlaces(position.coords.latitude, position.coords.longitude);
-      })
-      .catch(err => {
-        this.setState({ errorMessage: err.message });
-      });
-      
+    .then( position => {
+      this.getPlaces(position.coords.latitude, position.coords.longitude);
+    })
+    .catch(err => {
+      this.setState({ errorMessage: err.message });
+    });
   }
-  
-  getPlaces = async (latitude, longitude) => {
 
+  componentDidMount() {
+    this.coordinates();
+  }
+
+  getPlaces = async (latitude, longitude) => {
 
     const api_callCafe = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=cafe&key=${API_KEY}`);
     const dataCafe = await api_callCafe.json();
@@ -89,12 +90,7 @@ export default class GenerateBuildings extends React.Component {
     const api_callBar = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=bar&key=${API_KEY}`);
     const databar = await api_callBar.json();
 
-
     let arrayPlaceIds = [];
-    let api_Details = [];
-    let DeData = [];
-    let arrayImageCodes = [];
-
 
     for (let plc = 0; plc <= 5; plc++) {
       //Cofe push
@@ -104,6 +100,16 @@ export default class GenerateBuildings extends React.Component {
       //Bar push
       arrayPlaceIds.push(databar.results[plc].place_id);
     }
+
+    this.getPlacesDetails(arrayPlaceIds);
+
+  }
+
+  getPlacesDetails = async (arrayPlaceIds) => {
+
+    let api_Details = [];
+    let DeData = [];
+    let arrayImageCodes = [];
 
     for (let i = 0; i <= 17; i++) {
 
@@ -138,14 +144,17 @@ export default class GenerateBuildings extends React.Component {
           y++;
         }
       }
-
     }
-    for (let g = 0; g <= arrayImageCodes.length; g++) {
+    
+    this.getPlacesImageCodes(arrayImageCodes);
+  }
+
+  getPlacesImageCodes = (arrayImageCodes) => {
+
+    for (let g= 0; g <= arrayImageCodes.length; g++) {
       images.push('/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=' + arrayImageCodes[g] + '&key=' + API_KEY);
     }
-
     
-
   }
 
   ratingReview = reviewNumb => {
@@ -250,8 +259,11 @@ export default class GenerateBuildings extends React.Component {
     return colors;
   }
 
+  
 
-  render() {
+
+  render() { 
+
     let closeModal1 = () => this.setState({ showModal1: false });
     let closeModal2 = () => this.setState({ showModal2: false });
     let closeModal3 = () => this.setState({ showModal3: false });
@@ -296,6 +308,7 @@ export default class GenerateBuildings extends React.Component {
               style={{ zIndex: 8, transform: 'translate3d(0px, 0px, 25px)', boxShadow: this.placeRating(0) }}></Button >
               
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal1} onHide={closeModal1}>
+
                 <Modal.Body>
                   <Container>
                     <Row className="show-grid">
@@ -304,7 +317,7 @@ export default class GenerateBuildings extends React.Component {
                         <Card style={{ width: '25rem' }}>
                           <Carousel>
                             <Carousel.Item>
-                              <Image className="rounded mx-auto d-block" src={images[0]} />
+                            <Image className="rounded mx-auto d-block" src={images[0]} />
                             </Carousel.Item>
                             <Carousel.Item>
                               <Image className="rounded mx-auto d-block" src={images[1]} />
@@ -415,7 +428,6 @@ export default class GenerateBuildings extends React.Component {
                 </Modal.Body>
               </Modal>
             </div>
-
             <div className="building" data-depth="8">
               <span className="extrusion" style={{ zIndex: 0, transform: 'translate3d(0px, 0px, 1px)' }}></span>
               <span className="extrusion" style={{ zIndex: 1, transform: 'translate3d(0px, 0px, 4px)' }}></span>
@@ -945,7 +957,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 8, transform: 'translate3d(0px, 0px,  25px)' }}></span>
               <span className="extrusion" style={{ zIndex: 9, transform: 'translate3d(0px, 0px,  28px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal6: true })} 
-              style={{ zIndex: 10, transform: 'translate3d(0px, 0px,  31px)', boxShadow: this.placeRating(5) }}></Button >
+              style={{ zIndex: 10, transform: 'translate3d(0px, 0px,  31px)', boxShadow: this.placeRating(5)}}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal6} onHide={closeModal6}>
                 <Modal.Body>
                   <Container>

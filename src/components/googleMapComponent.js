@@ -3,7 +3,7 @@ import {getPosition} from './weatherLocationComponent';
 
 const mapStyle = require('../mapStyles/GoogleMapStyles.json');
 
-const API_KEY = 'AIzaSyCQLjfkj64FJWB0-wH50w-QlJsKVsAPlfY';
+const API_KEY = 'AIzaSyDayFhaalLtdI4xW1DzP2SSPFU3jXHvEOw';
 
 class GoogleMapComp extends Component {
 
