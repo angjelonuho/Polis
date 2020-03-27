@@ -228,39 +228,6 @@ export default class GenerateBuildings extends React.Component {
 
   }
 
-  placeRating = ratingNum => {
-  
-    let colors;
-
-    switch (Math.trunc(rating[ratingNum])) {
-      case 1:
-        colors = '0px 0px 11px 3px rgba(138,138,138,1)'
-        break;
-
-      case 2:
-        colors = '0px 0px 7px 2px rgba(0,128,0,1)'
-
-        break;
-      case 3:
-        colors = '0px 0px 7px 2px rgba(0,85,255,1)'
-        
-        break;
-      case 4:
-        colors = '0px 0px 7px 2px rgba(77,1,120,1)'
-        
-        break;
-      case 5:
-        colors = '0px 0px 7px 2px rgba(255,215,0,1)'
-        
-        break;
-      default:
-        colors = '0px 0px 11px 3px rgba(138,138,138,1)'
-    }
-    return colors;
-  }
-
-  
-
 
   render() { 
 
@@ -305,7 +272,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 6, transform: 'translate3d(0px, 0px, 19px)' }}></span>
               <span className="extrusion" style={{ zIndex: 7, transform: 'translate3d(0px, 0px, 22px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal1: true })} 
-              style={{ zIndex: 8, transform: 'translate3d(0px, 0px, 25px)', boxShadow: this.placeRating(0) }}></Button >
+              style={{ zIndex: 8, transform: 'translate3d(0px, 0px, 25px)' }}></Button >
               
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal1} onHide={closeModal1}>
 
@@ -437,7 +404,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 5, transform: 'translate3d(0px, 0px, 16px)' }}></span>
               <span className="extrusion" style={{ zIndex: 6, transform: 'translate3d(0px, 0px, 19px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal2: true })} 
-              style={{ zIndex: 7, transform: 'translate3d(0px, 0px, 22px)', boxShadow: this.placeRating(1) }}></Button >
+              style={{ zIndex: 7, transform: 'translate3d(0px, 0px, 22px)'  }}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal2} onHide={closeModal2}>
                 <Modal.Body>
                   <Container>
@@ -567,7 +534,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 5, transform: 'translate3d(0px, 0px,  16px)' }}></span>
               <span className="extrusion" style={{ zIndex: 6, transform: 'translate3d(0px, 0px,  19px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal3: true })} 
-              style={{ zIndex: 7, transform: 'translate3d(0px, 0px,  22px)', boxShadow: this.placeRating(2) }}></Button >
+              style={{ zIndex: 7, transform: 'translate3d(0px, 0px,  22px)' }}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal3} onHide={closeModal3}>
                 <Modal.Body>
                   <Container>
@@ -696,7 +663,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 4, transform: 'translate3d(0px, 0px,  13px)' }}></span>
               <span className="extrusion" style={{ zIndex: 5, transform: 'translate3d(0px, 0px,  16px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal4: true })} 
-              style={{ zIndex: 6, transform: 'translate3d(0px, 0px,  19px)', boxShadow: this.placeRating(3) }}></Button >
+              style={{ zIndex: 6, transform: 'translate3d(0px, 0px,  19px)' }}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal4} onHide={closeModal4}>
                 <Modal.Body>
                   <Container>
@@ -824,7 +791,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 3, transform: 'translate3d(0px, 0px,  10px)' }}></span>
               <span className="extrusion" style={{ zIndex: 4, transform: 'translate3d(0px, 0px,  13px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal5: true })} 
-              style={{ zIndex: 5, transform: 'translate3d(0px, 0px,  16px)', boxShadow: this.placeRating(4) }}></Button >
+              style={{ zIndex: 5, transform: 'translate3d(0px, 0px,  16px)' }}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal5} onHide={closeModal5}>
                 <Modal.Body>
                   <Container>
@@ -957,7 +924,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 8, transform: 'translate3d(0px, 0px,  25px)' }}></span>
               <span className="extrusion" style={{ zIndex: 9, transform: 'translate3d(0px, 0px,  28px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal6: true })} 
-              style={{ zIndex: 10, transform: 'translate3d(0px, 0px,  31px)', boxShadow: this.placeRating(5)}}></Button >
+              style={{ zIndex: 10, transform: 'translate3d(0px, 0px,  31px)'}}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal6} onHide={closeModal6}>
                 <Modal.Body>
                   <Container>
@@ -1088,7 +1055,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 6, transform: 'translate3d(0px, 0px,  19px)' }}></span>
               <span className="extrusion" style={{ zIndex: 7, transform: 'translate3d(0px, 0px,  22px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal7: true })} 
-              style={{ zIndex: 8, transform: 'translate3d(0px, 0px,  25px)', boxShadow: this.placeRating(6) }}></Button >
+              style={{ zIndex: 8, transform: 'translate3d(0px, 0px,  25px)'}}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal7} onHide={closeModal7}>
                 <Modal.Body>
                   <Container>
@@ -1224,7 +1191,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 11, transform: 'translate3d(0px, 0px,  34px)' }}></span>
               <span className="extrusion" style={{ zIndex: 12, transform: 'translate3d(0px, 0px,  37px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal8: true })} 
-              style={{ zIndex: 13, transform: 'translate3d(0px, 0px,  40px)', boxShadow: this.placeRating(7) }}></Button >
+              style={{ zIndex: 13, transform: 'translate3d(0px, 0px,  40px)'}}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal8} onHide={closeModal8}>
                 <Modal.Body>
                   <Container>
@@ -1351,7 +1318,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 2, transform: 'translate3d(0px, 0px,  7px)' }}></span>
               <span className="extrusion" style={{ zIndex: 3, transform: 'translate3d(0px, 0px,  10px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal9: true })} 
-              style={{ zIndex: 4, transform: 'translate3d(0px, 0px,  13px)', boxShadow: this.placeRating(8) }}></Button >
+              style={{ zIndex: 4, transform: 'translate3d(0px, 0px,  13px)'}}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal9} onHide={closeModal9}>
                 <Modal.Body>
                   <Container>
@@ -1487,7 +1454,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 11, transform: 'translate3d(0px, 0px,  34px)' }}></span>
               <span className="extrusion" style={{ zIndex: 12, transform: 'translate3d(0px, 0px,  37px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal10: true })} 
-              style={{ zIndex: 13, transform: 'translate3d(0px, 0px,  40px)', boxShadow: this.placeRating(9) }}></Button >
+              style={{ zIndex: 13, transform: 'translate3d(0px, 0px,  40px)' }}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal10} onHide={closeModal10}>
                 <Modal.Body>
                   <Container>
@@ -1619,7 +1586,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 7, transform: 'translate3d(0px, 0px,  22px)' }}></span>
               <span className="extrusion" style={{ zIndex: 8, transform: 'translate3d(0px, 0px,  25px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal11: true })} 
-              style={{ zIndex: 9, transform: 'translate3d(0px, 0px,  28px)', boxShadow: this.placeRating(10) }}></Button >
+              style={{ zIndex: 9, transform: 'translate3d(0px, 0px,  28px)' }}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal11} onHide={closeModal11}>
                 <Modal.Body>
                   <Container>
@@ -1749,7 +1716,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 5, transform: 'translate3d(0px, 0px,  16px)' }}></span>
               <span className="extrusion" style={{ zIndex: 6, transform: 'translate3d(0px, 0px,  19px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal12: true })} 
-              style={{ zIndex: 7, transform: 'translate3d(0px, 0px,  22px)', boxShadow: this.placeRating(11) }}></Button >
+              style={{ zIndex: 7, transform: 'translate3d(0px, 0px,  22px)'}}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal12} onHide={closeModal12}>
                 <Modal.Body>
                   <Container>
@@ -1882,7 +1849,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 8, transform: 'translate3d(0px, 0px,  25px)' }}></span>
               <span className="extrusion" style={{ zIndex: 9, transform: 'translate3d(0px, 0px,  28px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal13: true })} 
-              style={{ zIndex: 10, transform: 'translate3d(0px, 0px,  31px)', boxShadow: this.placeRating(12) }}></Button >
+              style={{ zIndex: 10, transform: 'translate3d(0px, 0px,  31px)'}}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal13} onHide={closeModal13}>
                 <Modal.Body>
                   <Container>
@@ -2015,7 +1982,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 8, transform: 'translate3d(0px, 0px,  25px)' }}></span>
               <span className="extrusion" style={{ zIndex: 9, transform: 'translate3d(0px, 0px,  28px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal14: true })} 
-              style={{ zIndex: 10, transform: 'translate3d(0px, 0px,  31px)', boxShadow: this.placeRating(13) }}></Button >
+              style={{ zIndex: 10, transform: 'translate3d(0px, 0px,  31px)' }}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal14} onHide={closeModal14}>
                 <Modal.Body>
                   <Container>
@@ -2148,7 +2115,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 8, transform: 'translate3d(0px, 0px,  25px)' }}></span>
               <span className="extrusion" style={{ zIndex: 9, transform: 'translate3d(0px, 0px,  28px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal15: true })} 
-              style={{ zIndex: 10, transform: 'translate3d(0px, 0px,  31px)', boxShadow: this.placeRating(14) }}></Button >
+              style={{ zIndex: 10, transform: 'translate3d(0px, 0px,  31px)'}}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal15} onHide={closeModal15}>
                 <Modal.Body>
                   <Container>
@@ -2284,7 +2251,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 11, transform: 'translate3d(0px, 0px,  34px)' }}></span>
               <span className="extrusion" style={{ zIndex: 12, transform: 'translate3d(0px, 0px,  37px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal16: true })} 
-              style={{ zIndex: 13, transform: 'translate3d(0px, 0px,  40px)', boxShadow: this.placeRating(15) }}></Button >
+              style={{ zIndex: 13, transform: 'translate3d(0px, 0px,  40px)'}}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal16} onHide={closeModal16}>
                 <Modal.Body>
                   <Container>
@@ -2416,7 +2383,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 7, transform: 'translate3d(0px, 0px,  22px)' }}></span>
               <span className="extrusion" style={{ zIndex: 8, transform: 'translate3d(0px, 0px,  25px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal17: true })} 
-              style={{ zIndex: 9, transform: 'translate3d(0px, 0px,  28px)', boxShadow: this.placeRating(16) }}></Button >
+              style={{ zIndex: 9, transform: 'translate3d(0px, 0px,  28px)'}}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal17} onHide={closeModal17}>
                 <Modal.Body>
                   <Container>
@@ -2544,7 +2511,7 @@ export default class GenerateBuildings extends React.Component {
               <span className="extrusion" style={{ zIndex: 3, transform: 'translate3d(0px, 0px,  10px)' }}></span>
               <span className="extrusion" style={{ zIndex: 4, transform: 'translate3d(0px, 0px,  13px)' }}></span>
               <Button  className="extrusion" onClick={() => this.setState({ showModal18: true })} 
-              style={{ zIndex: 5, transform: 'translate3d(0px, 0px,  16px)', boxShadow: this.placeRating(17) }}></Button >
+              style={{ zIndex: 5, transform: 'translate3d(0px, 0px,  16px)'}}></Button >
               <Modal size="xl" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.showModal18} onHide={closeModal18}>
                 <Modal.Body>
                   <Container>

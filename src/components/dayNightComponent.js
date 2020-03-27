@@ -90,11 +90,13 @@ export default class DayNight extends React.Component {
 
   }
 
-  render() {
-    if (this.state.hours < 18 && this.state.hours > 6) {
-      return (
+  checkTimeOfDay = () => {
 
-        <div>
+    let timeOfday;
+    
+    if (this.state.hours < 18 && this.state.hours > 6) {
+      timeOfday = 
+        <>
           <div className="container leftside">
             <div className="row">
               <div className="col flex-grow-0">
@@ -109,11 +111,11 @@ export default class DayNight extends React.Component {
             </div>
           </div>
           <this.toggleDay />
-        </div>
-      );
+        </>
+     
     } else {
-      return (
-        <div>
+      timeOfday = 
+      <>
           <div className="container leftside">
             <div className="row">
               <div className="col flex-grow-0">
@@ -128,9 +130,20 @@ export default class DayNight extends React.Component {
             </div>
           </div>
           <this.toggleNight />
-        </div>
-      );
+       </>
+      
     }
+
+    return timeOfday;
+
   }
+
+  render() {
+    
+    return(
+      this.checkTimeOfDay()
+    )
+  }
+
 }
 

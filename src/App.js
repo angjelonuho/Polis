@@ -6,17 +6,18 @@ import GoogleMapComp from './components/googleMapComponent';
 
 
 function App() {
+
     return (
         <div className="App container-fluid">
-            <DayNight/>
-            <GenerateBuildings/>
-            <GoogleMapComp/>
-            
-        </div>
+            <DayNight />
+            <GenerateBuildings />
+            <GoogleMapComp />
         
-
+        </div>
 
     );
 }
+
+
 
 export default App;
