@@ -1,0 +1,176 @@
+@media only screen and (min-width: 3399px) and (max-width: 3600px){
+    .leftside{
+        width: 30% !important;
+    }
+}
+
+@media only screen and (min-width: 3199px) and (max-width: 3400px){
+    .leftside{
+        width: 30% !important;
+    }
+}
+
+
+@media only screen and (min-width: 2999px) and (max-width: 3200px){
+    .leftside{
+        width: 32% !important;
+    }
+}
+
+@media only screen and (min-width: 2799px) and (max-width: 3000px){
+    .leftside{
+        width: 34% !important;
+    }
+}
+@media only screen and (min-width: 2599px) and (max-width: 2800px){
+    .leftside{
+        width: 36% !important;
+    }
+}
+@media only screen and (min-width: 2399px) and (max-width: 2600px){
+    .leftside{
+        width: 38% !important;
+    }
+}
+@media only screen and (min-width: 2199px) and (max-width: 2400px){
+    .leftside{
+        width: 40% !important;
+    }
+}
+
+@media only screen and (min-width: 2100px) and (max-width: 2200px){
+    .leftside{
+        width: 42% !important;
+    }
+}
+
+
+@media only screen and  (min-width: 2000px) and (max-width: 2099px){
+    .leftside{
+        width: 44% !important;
+    }
+}
+
+@media only screen and (min-width: 1950px) and (max-width: 1999px) {
+    .leftside{
+        width: 45% !important;
+    }
+}
+@media only screen and (min-width: 1850px) and (max-width: 1949px)  {
+    .leftside{
+        width: 47% !important;
+    }
+}
+
+@media (max-width: 1800px){
+.exchange{
+    width: 154%!important;
+    margin-top: 5% !important;
+    min-height: auto !important;
+}
+.leftside{
+    width: 35% !important;
+}
+.cloud:nth-child(2) {
+    display: none !important;
+}
+
+}
+
+@media (max-width: 1500px){
+
+    .leftside {
+        width: 42% !important;
+    }
+ 
+}
+@media (max-width: 1292px){
+
+    .leftside {
+        width: 50% !important;
+    }
+ 
+}
+@media (max-width: 1050px){
+
+    .exchange{
+        width: 100%!important;
+        margin-top: 5% !important;
+        min-height: auto !important;
+    }
+    .location{
+        margin-top: 2% !important;
+    }
+    .clock-container {
+        display: flex !important;
+        overflow: hidden !important;
+        flex-direction: row !important;
+    } 
+    .clock-col {
+        margin-right: 15px !important;
+        margin-left: 15px !important;
+        min-width: 49px !important;
+    }
+    .clock-col .display-4 {
+        font-size: 2em !important;
+        margin: 0 !important;
+    }
+    .weatherrow {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+    .clock-label {
+        font-size: .5rem !important;
+        margin: 0 0 2px !important;
+    }
+    .exhInpRes{
+        padding: 0 0 0 1rem !important;
+    }
+    .exhInpRes .form-group {
+        margin-bottom: 0 !important;
+    }
+ 
+}
+@media (max-width: 650px){
+
+    .leftside {
+        position: absolute !important;
+        height: 97vh !important;
+        width: 100vw !important;
+        z-index: 999 !important;
+        background: transparent !important;
+        margin-top: 2% !important;
+
+        left: 50%;
+        margin-left: -171px !important;
+    }
+    .dayBack {
+        height: 100vh !important;
+    }
+    .sun{
+        position: initial !important;
+        float: right;
+    }
+    .nightBack {
+        height: 100vh !important;
+    }
+    .cloud {
+        display: none !important;
+    }
+    .exchange{
+        border-bottom-right-radius: 4px !important;
+    }
+    .App {
+        padding: 0px !important;
+    }
+    .cityNameInfo {
+        min-height: 100%;
+    }
+
+ 
+ 
+}
+
+@media (max-width: 377px){
+    
+}

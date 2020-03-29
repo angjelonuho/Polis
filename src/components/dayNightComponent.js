@@ -9,7 +9,6 @@ export default class DayNight extends React.Component {
     super(props);
 
     this.state = {
-      visible: false,
       time: new Date().toLocaleString()
     };
 
@@ -92,56 +91,36 @@ export default class DayNight extends React.Component {
 
   checkTimeOfDay = () => {
 
-    let timeOfday;
+    let DayNight;
     
     if (this.state.hours < 18 && this.state.hours > 6) {
-      timeOfday = 
-        <>
-          <div className="container leftside">
-            <div className="row">
-              <div className="col flex-grow-0">
-                {this.clock()}
-              </div>
-              <div className="col-auto">
-                <LocationWeather />
-              </div>
-              <div className="col-auto">
-                <Exchange />
-              </div>
-            </div>
-          </div>
-          <this.toggleDay />
-        </>
-     
+      DayNight = this.toggleDay()
     } else {
-      timeOfday = 
-      <>
-          <div className="container leftside">
-            <div className="row">
-              <div className="col flex-grow-0">
-                {this.clock()}
-              </div>
-              <div className="col-auto">
-                <LocationWeather />
-              </div>
-              <div className="col-auto">
-                <Exchange />
-              </div>
-            </div>
-          </div>
-          <this.toggleNight />
-       </>
-      
+      DayNight = this.toggleNight()
     }
-
-    return timeOfday;
-
+    
+    return DayNight;
   }
 
   render() {
     
     return(
-      this.checkTimeOfDay()
+      <>
+      <div className="container leftside">
+        <div className="row">
+          <div className="col flex-grow-0">
+            {this.clock()}
+          </div>
+          <div className="col-auto">
+            <LocationWeather />
+          </div>
+          <div className="col-auto">
+            <Exchange />
+          </div>
+        </div>
+      </div>
+      {this.checkTimeOfDay()}
+    </>
     )
   }
 

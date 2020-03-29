@@ -87,7 +87,7 @@ class LocationWeather extends React.Component {
     const { city, temperatureC, temperatureCmin, temperatureCmax, temperatureCfeels, tempdesc, sunrise, sunset, droplet, wind } = this.state;
     if (city) {
       return (
-        <div className="container cityNameInfo">
+        <div className="container cityNameInfo location">
           <div className="row weatherrow ">
             <h2 className="cityName">{city}</h2>
             <p className="clock-label">City</p>

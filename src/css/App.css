@@ -180,6 +180,7 @@
   width:50% !important;
   margin: 0;
   position: absolute;
+  overflow: hidden;
   border-bottom-right-radius: 60px;
   
 
@@ -194,6 +195,9 @@
 
   /* background-image: radial-gradient( circle 328px at 2.9% 15%,  rgba(191,224,251,1) 0%, rgba(232,233,251,1) 25.8%, rgba(252,239,250,1) 50.8%, rgba(234,251,251,1) 77.6%, rgba(240,251,244,1) 100.7% ); */
   
+}
+.exchange{
+  border-bottom-right-radius: 40px !important;
 }
 .cityName{
   font-size: 60px;
@@ -229,6 +233,9 @@
   font-size: .7rem;
   margin-top: 0px;
 }
+.temp-labelDt{
+  color:  rgba(23, 22, 22, 0.5);
+}
 .weatherrow{
   padding:10px;
 }
@@ -240,11 +247,11 @@
 .cloud {
   width: 150px;
   height: 50px;
-  background: #f2f9fe;
+  background: #f2f9fe !important;
   border-radius: 100px;
   position: absolute;
   z-index: 1000;
-  left: 52%;
+  left: 60%;
   margin: 120px auto;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(5%, #f2f9fe), to(#d6f0fd));
   background: linear-gradient(to top, #f2f9fe 5%, #d6f0fd 100%);
@@ -1048,4 +1055,7 @@ background-color: #d8d8d8;
 .moneyCol{
   padding-right: 0px !important;
   padding-left: 0px !important;
+}
+.exhInpRes{
+ padding: 1rem;
 }

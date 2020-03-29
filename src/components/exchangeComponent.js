@@ -7,6 +7,8 @@ class Exchange extends Component {
             amount: 1,
             result: 0,
 
+            lastupt: undefined,
+
             fromCurrency: "USD",
             toCurrency: "EUR",
 
@@ -65,9 +67,14 @@ class Exchange extends Component {
                     }
 
                     response.json().then(data => {
+                        let lastUpdatedRates = data.date;
                         let rates = data.rates[this.state.toCurrency];
                         let result = this.state.amount * rates;
-                        this.setState({ result: result.toFixed(2) });
+                        this.setState({ 
+                            result: result.toFixed(2) ,
+                            lastupt: lastUpdatedRates
+                        
+                        });
                     })
                 }
             )
@@ -99,7 +106,7 @@ class Exchange extends Component {
 
         return (
 
-            <div className="container cityNameInfo">
+            <div className="container cityNameInfo exchange">
                 <div className="row p-3">
                     <div className="col moneyCol"><img src="https://media.giphy.com/media/KDInXCxJOL9gb5cwgR/giphy.gif" className="moneyGif" alt="E" /></div>
                     <div className="col moneyCol"><img src="https://media.giphy.com/media/3gVqQCCJXP6N7FfRWo/giphy.gif" className="moneyGif" alt="X" /></div>
@@ -110,7 +117,7 @@ class Exchange extends Component {
                     <div className="col moneyCol"><img src="https://media.giphy.com/media/ln0TUwW3MlFahfSF5J/giphy.gif" className="moneyGif" alt="G" /></div>
                     <div className="col moneyCol"><img src="https://media.giphy.com/media/fLpOPkumtoO0s4UkSi/giphy.gif" className="moneyGif" alt="E" /></div>
                 </div>
-                <div className="row p-3">
+                <div className="row exhInpRes">
                     <form>
 
                         <div className="form-row">
@@ -136,6 +143,9 @@ class Exchange extends Component {
                                     {dropdownItems}
                                 </select>
                             </div>
+                        </div>
+                        <div className="form-row">
+                        <p className="temp-label">Last Updated  <span className="temp-labelDt"> {this.state.lastupt} </span></p>
                         </div>
                     </form>
 
