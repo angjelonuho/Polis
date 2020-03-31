@@ -93,8 +93,12 @@
 }
 @media (max-width: 1050px){
 
+    .leftside {
+        width: 42% !important;
+    }
+
     .exchange{
-        width: 100%!important;
+        width: 102%!important;
         margin-top: 5% !important;
         min-height: auto !important;
     }
@@ -136,13 +140,12 @@
     .leftside {
         position: absolute !important;
         height: 97vh !important;
-        width: 100vw !important;
+        width: 38% !important;
         z-index: 999 !important;
         background: transparent !important;
         margin-top: 2% !important;
 
-        left: 50%;
-        margin-left: -171px !important;
+        left: 17%;
     }
     .dayBack {
         height: 100vh !important;
@@ -171,6 +174,72 @@
  
 }
 
-@media (max-width: 377px){
-    
+
+@media (max-height: 4000px){
+    .App{
+     height: 100vh !important; 
+    }
+    .dayBack{
+     height: 96vh !important;
+     width: 98vw !important; 
+    }
+    .nightBack{
+     height: 96vh !important; 
+     width: 98vw !important; 
+    }
+ }
+@media (max-height: 937px){
+    .App{
+     height: 100vh !important; 
+    }
+    .dayBack{
+     height: 96vh !important;
+     width: 98vw !important; 
+    }
+    .nightBack{
+     height: 96vh !important; 
+     width: 98vw !important; 
+    }
+ }
+
+@media (max-height: 800px){
+   .App{
+    height: 125vh !important; 
+   }
+   .dayBack{
+    height: 121vh !important;
+    width: 97vw !important; 
+   }
+   .nightBack{
+    height: 121vh !important; 
+    width: 97vw !important; 
+   }
 }
+@media (max-height: 680px){
+    .App{
+        height: 165vh !important; 
+       }
+       .dayBack{
+        height: 160vh  !important;
+        width: 97vw !important; 
+       }
+       .nightBack{
+        height: 160vh  !important;  
+        width: 97vw !important; 
+       }
+ }
+
+ @media (max-height: 420px){
+    .App{
+        height: 209vh !important; 
+       }
+       .dayBack{
+        height: 200vh  !important;
+        width: 97vw !important; 
+       }
+       .nightBack{
+        height: 200vh  !important; 
+        width: 97vw !important; 
+       }
+ }
+
