@@ -1065,3 +1065,6 @@ background-color: #d8d8d8;
   font-weight: 400;
   line-height: 1.2;
 }
+.inlineColums{
+  display: -webkit-inline-box;
+}

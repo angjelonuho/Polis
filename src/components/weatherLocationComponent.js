@@ -4,7 +4,14 @@ import SunsetIcon from '../img/icons/sunset.svg';
 import DropletIcon from '../img/icons/droplet.svg';
 import WindIcon from '../img/icons/wind.svg';
 
-const API_KEY = '67b51a761ab09981501241df566ec5c4';
+
+import '../css/App.css';
+import '../css/responsiveHeader.css';
+import '../css/responsiveBody.css';
+import '../css/skeleton.css';
+
+
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 //ASK user for geographic position
 export function getPosition(){
@@ -85,7 +92,6 @@ class LocationWeather extends React.Component {
 
   render() {
     const { city, temperatureC, temperatureCmin, temperatureCmax, temperatureCfeels, tempdesc, sunrise, sunset, droplet, wind } = this.state;
-    if (city) {
       return (
         <div className="container cityNameInfo location">
           <div className="row weatherrow ">
@@ -93,27 +99,35 @@ class LocationWeather extends React.Component {
             <p className="clock-label">City</p>
           </div>
           <div className="row weatherrow">
-            <div className="col-auto mr-auto">
-              <h2 className="tempName tempNamesm text-nowrap"><img className="sunImg" src={SunriseIcon} alt="sunrise" /> {sunrise}</h2>
+            <div className="col-auto mr-auto inlineColums">
+              <img className="sunImg" src={SunriseIcon} alt="sunrise" />
+              <h2 className="tempName tempNamesm text-nowrap">{sunrise}</h2>
             </div>
-            <div className="col-auto mr-auto">
-              <h2 className="tempName tempNamesm text-nowrap"><img className="sunImg" src={SunsetIcon} alt="sunset" /> {sunset}</h2>
+            <div className="col-auto mr-auto inlineColums">
+              <img className="sunImg" src={SunsetIcon} alt="sunset" />
+              <h2 className="tempName tempNamesm text-nowrap">{sunset}</h2>
             </div>
           </div>
           <div className="row weatherrow justify-content-md-center">
-          <div className="col-md-auto">
-              <h2 className="tempName ">{temperatureC}&deg;C</h2>
-              <h2 className="tempNamemd">{tempdesc}</h2>
+          <div className="col-md-auto inlineColums">
+              <h2 className="tempName">{temperatureC}</h2><h2>&deg;C</h2>
             </div>
+          </div>
+          <div className="row weatherrow justify-content-md-center">
+          <div className="col-md-auto inlineColums">
+             <h2 className="tempNamemd">{tempdesc}</h2>
+             </div>
           </div>
 
         
           <div className="row weatherrow">
-            <div className="col-auto mr-auto">
-              <h2 className="tempNamesm  text-nowrap"><img className="sunImg sunImg" src={DropletIcon} alt="sunrise" />{droplet}%</h2>
+            <div className="col-auto mr-auto inlineColums">
+            <img className="sunImg sunImg" src={DropletIcon} alt="sunrise" />
+              <h2 className="tempNamesm  text-nowrap">{droplet}</h2><h2 className="tempNamesm  text-nowrap">%</h2>
             </div>
-            <div className="col-auto mr-auto">
-              <h2 className="tempNamesm text-nowrap"><img className="sunImg sunImg" src={WindIcon} alt="sunrise" />{wind} km/h</h2>
+            <div className="col-auto mr-auto inlineColums">
+            <img className="sunImg sunImg" src={WindIcon} alt="sunrise" />
+              <h2 className="tempNamesm text-nowrap">{wind}</h2><h2 className="tempNamesm text-nowrap">km/h</h2>
             </div>
           </div>
           <div className="row weatherrow">
@@ -130,12 +144,7 @@ class LocationWeather extends React.Component {
 
         </div>
       );
-    }
-    else {
-      return (
-        <div>Loading...</div>
-      )
-    }
+    
   }
 
 }

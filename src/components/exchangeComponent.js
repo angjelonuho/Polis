@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 
+import '../css/App.css';
+import '../css/responsiveHeader.css';
+import '../css/responsiveBody.css';
+import '../css/skeleton.css';
+
+
 class Exchange extends Component {
     constructor(props) {
         super(props);
@@ -145,7 +151,7 @@ class Exchange extends Component {
                             </div>
                         </div>
                         <div className="form-row">
-                        <p className="temp-label">Last Updated  <span className="temp-labelDt"> {this.state.lastupt} </span></p>
+                        <p className="temp-label">Last Updated  <span className="temp-labelDt">{this.state.lastupt}</span></p>
                         </div>
                     </form>
 

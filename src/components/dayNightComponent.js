@@ -2,7 +2,10 @@ import React from 'react';
 import LocationWeather from './weatherLocationComponent';
 import Exchange from './exchangeComponent';
 
-
+import '../css/App.css';
+import '../css/responsiveHeader.css';
+import '../css/responsiveBody.css';
+import '../css/skeleton.css';
 
 export default class DayNight extends React.Component {
   constructor(props) {
@@ -68,7 +71,7 @@ export default class DayNight extends React.Component {
     return (
       <div className="clock-container">
         <div className="clock-col">
-          <p className="display-4 App-clock ">{this.state.day}</p>
+          <p className="display-4 App-clock clockSkeleton">{this.state.day}</p>
           <p className="clock-label">Day</p>
         </div>
         <div className="clock-col">

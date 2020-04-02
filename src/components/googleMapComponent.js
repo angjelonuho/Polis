@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
 import {getPosition} from './weatherLocationComponent';
 
+import '../css/App.css';
+import '../css/responsiveHeader.css';
+import '../css/responsiveBody.css';
+import '../css/skeleton.css';
+
 const mapStyle = require('../mapStyles/GoogleMapStyles.json');
 
-const API_KEY = 'AIzaSyDayFhaalLtdI4xW1DzP2SSPFU3jXHvEOw';
+const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 class GoogleMapComp extends Component {
 

@@ -15,7 +15,12 @@ import Media from 'react-bootstrap/Media';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 
-const API_KEY = 'AIzaSyDayFhaalLtdI4xW1DzP2SSPFU3jXHvEOw';
+import '../css/App.css';
+import '../css/responsiveHeader.css';
+import '../css/responsiveBody.css';
+import '../css/skeleton.css';
+
+const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 
 //Place details
