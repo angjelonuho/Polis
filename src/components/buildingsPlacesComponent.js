@@ -31,6 +31,7 @@ const rating = [];
 const userRatingTotal = [];
 const website = [];
 const images = [];
+let arrayImageCodes = [];
 
 //Place reviews
 const reviewsName = [];
@@ -113,7 +114,6 @@ export default class GenerateBuildings extends React.Component {
 
     let api_Details = [];
     let DeData = [];
-    let arrayImageCodes = [];
 
     for (let i = 0; i <= 17; i++) {
 
@@ -148,15 +148,6 @@ export default class GenerateBuildings extends React.Component {
           y++;
         }
       }
-    }
-
-    this.getPlacesImageCodes(arrayImageCodes);
-  }
-
-  getPlacesImageCodes = (arrayImageCodes) => {
-
-    for (let g = 0; g <= arrayImageCodes.length; g++) {
-      images.push('/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=' + arrayImageCodes[g] + '&key=' + API_KEY);
     }
 
   }
@@ -287,18 +278,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[0]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[1]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[2]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[3]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(0, 4).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -404,18 +393,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[4]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[5]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[6]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[7]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(4, 8).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -522,18 +509,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[8]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[9]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[10]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[11]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(8, 12).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -639,18 +624,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[12]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[13]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[14]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[15]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(12, 16).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -755,18 +738,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[16]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[17]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[18]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[19]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(16, 20).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -876,18 +857,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[20]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[21]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[22]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[23]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(20, 24).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -995,18 +974,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[24]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[25]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[26]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[27]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(24, 28).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -1119,18 +1096,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[28]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[29]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[30]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[31]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(28, 32).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -1234,18 +1209,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[32]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[33]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[34]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[35]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(32, 36).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -1358,18 +1331,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[36]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[37]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[38]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[39]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(36, 40).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -1478,18 +1449,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[40]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[41]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[42]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[43]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(40, 44).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -1596,18 +1565,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[44]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[45]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[46]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[47]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(44, 48).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -1717,18 +1684,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[48]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[49]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[50]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[51]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(48, 52).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -1838,18 +1803,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[52]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[53]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[54]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[55]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(52, 56).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -1959,18 +1922,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[56]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[57]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[58]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[59]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(56, 60).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -2083,18 +2044,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[60]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[61]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[62]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[63]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(60, 64).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -2203,18 +2162,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[64]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[65]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[66]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[67]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(64, 68).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
@@ -2319,15 +2276,16 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[68]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[69]} />
-                              </Carousel.Item>
-                              <Carousel.Item>
-                                <Image className="rounded mx-auto d-block" src={images[70]} />
-                              </Carousel.Item>
+                              {arrayImageCodes.slice(68, 72).map(el => (
+                                <Carousel.Item>
+                                  <Image
+                                    className="rounded mx-auto d-block"
+
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    alt="placeholder"
+                                  />
+                                </Carousel.Item>
+                              ))}
                             </Carousel>
 
                             <Card.Body>
