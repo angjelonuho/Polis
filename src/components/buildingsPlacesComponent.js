@@ -30,7 +30,6 @@ const phoneNumber = [];
 const rating = [];
 const userRatingTotal = [];
 const website = [];
-const images = [];
 let arrayImageCodes = [];
 
 //Place reviews
