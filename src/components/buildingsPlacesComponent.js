@@ -282,7 +282,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -397,7 +397,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -513,7 +513,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -628,7 +628,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -742,7 +742,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -861,7 +861,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -978,7 +978,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -1100,7 +1100,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -1213,7 +1213,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -1335,7 +1335,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -1453,7 +1453,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -1569,7 +1569,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -1688,7 +1688,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -1807,7 +1807,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -1926,7 +1926,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -2048,7 +2048,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -2166,7 +2166,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
@@ -2280,7 +2280,7 @@ export default class GenerateBuildings extends React.Component {
                                   <Image
                                     className="rounded mx-auto d-block"
 
-                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}&signature=BASE64_SIGNATURE`}
+                                    src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
