@@ -277,16 +277,15 @@ export default class GenerateBuildings extends React.Component {
 
                           <Card>
                             <Carousel>
-                              {arrayImageCodes.slice(0, 4).map(el => (
-                                <Carousel.Item>
+                              {arrayImageCodes.slice(0, 4).map((el) =>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
-
                                     src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
                                 </Carousel.Item>
-                              ))}
+                              )}
                             </Carousel>
 
                             <Card.Body>
@@ -393,7 +392,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(4, 8).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
@@ -509,7 +508,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(8, 12).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
@@ -624,7 +623,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(12, 16).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
@@ -738,7 +737,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(16, 20).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
@@ -857,7 +856,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(20, 24).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
@@ -974,7 +973,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(24, 28).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
@@ -1096,7 +1095,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(28, 32).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
@@ -1209,7 +1208,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(32, 36).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
@@ -1331,7 +1330,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(36, 40).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
@@ -1449,7 +1448,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(40, 44).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
@@ -1565,7 +1564,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(44, 48).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
@@ -1684,7 +1683,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(48, 52).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
@@ -1803,7 +1802,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(52, 56).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
@@ -1922,10 +1921,9 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(56, 60).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
-
                                     src={`/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${el}&key=${API_KEY}`}
                                     alt="placeholder"
                                   />
@@ -2044,7 +2042,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(60, 64).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
@@ -2162,7 +2160,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(64, 68).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
@@ -2276,7 +2274,7 @@ export default class GenerateBuildings extends React.Component {
                           <Card style={{ width: '25rem' }}>
                             <Carousel>
                               {arrayImageCodes.slice(68, 72).map(el => (
-                                <Carousel.Item>
+                                <Carousel.Item key={el}>
                                   <Image
                                     className="rounded mx-auto d-block"
 
