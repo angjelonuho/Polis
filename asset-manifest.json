@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/Polis/static/css/main.bcd3361b.chunk.css",
+    "main.js": "/Polis/static/js/main.638d4807.chunk.js",
+    "main.js.map": "/Polis/static/js/main.638d4807.chunk.js.map",
+    "runtime-main.js": "/Polis/static/js/runtime-main.de395dea.js",
+    "runtime-main.js.map": "/Polis/static/js/runtime-main.de395dea.js.map",
+    "static/css/2.47e06e2e.chunk.css": "/Polis/static/css/2.47e06e2e.chunk.css",
+    "static/js/2.497dc35d.chunk.js": "/Polis/static/js/2.497dc35d.chunk.js",
+    "static/js/2.497dc35d.chunk.js.map": "/Polis/static/js/2.497dc35d.chunk.js.map",
+    "index.html": "/Polis/index.html",
+    "precache-manifest.158bc33c40343bacb3e3335057d34908.js": "/Polis/precache-manifest.158bc33c40343bacb3e3335057d34908.js",
+    "service-worker.js": "/Polis/service-worker.js",
+    "static/css/2.47e06e2e.chunk.css.map": "/Polis/static/css/2.47e06e2e.chunk.css.map",
+    "static/css/main.bcd3361b.chunk.css.map": "/Polis/static/css/main.bcd3361b.chunk.css.map",
+    "static/js/2.497dc35d.chunk.js.LICENSE": "/Polis/static/js/2.497dc35d.chunk.js.LICENSE",
+    "static/media/droplet.svg": "/Polis/static/media/droplet.47cfd45b.svg",
+    "static/media/sunrise.svg": "/Polis/static/media/sunrise.8e152057.svg",
+    "static/media/sunset.svg": "/Polis/static/media/sunset.cdc8210e.svg",
+    "static/media/wind.svg": "/Polis/static/media/wind.8255af02.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.de395dea.js",
+    "static/css/2.47e06e2e.chunk.css",
+    "static/js/2.497dc35d.chunk.js",
+    "static/css/main.bcd3361b.chunk.css",
+    "static/js/main.638d4807.chunk.js"
+  ]
+}
