@@ -4,11 +4,11 @@ import SunsetIcon from '../img/icons/sunset.svg';
 import DropletIcon from '../img/icons/droplet.svg';
 import WindIcon from '../img/icons/wind.svg';
 
-
+import '../css/skeleton.css';
 import '../css/App.css';
 import '../css/responsiveHeader.css';
 import '../css/responsiveBody.css';
-import '../css/skeleton.css';
+
 
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;

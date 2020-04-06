@@ -82,6 +82,9 @@
     .leftside {
         width: 42% !important;
     }
+    .weatherSkeleton {
+        width: 288px !important;
+    }
  
 }
 @media (max-width: 1292px){
@@ -96,6 +99,9 @@
     .leftside {
         width: 42% !important;
     }
+    .weatherSkeleton {
+        width: 318px !important;
+    }
 
     .exchange{
         width: 102%!important;
@@ -103,6 +109,9 @@
         min-height: auto !important;
     }
     .location{
+        margin-top: 2% !important;
+    }
+    .weatherSkeleton{
         margin-top: 2% !important;
     }
     .clock-container {
