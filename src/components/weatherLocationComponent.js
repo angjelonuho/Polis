@@ -92,6 +92,7 @@ class LocationWeather extends React.Component {
 
   render() {
     const { city, temperatureC, temperatureCmin, temperatureCmax, temperatureCfeels, tempdesc, sunrise, sunset, droplet, wind } = this.state;
+    if (city) {
       return (
         <div className="container cityNameInfo location">
           <div className="row weatherrow ">
@@ -141,10 +142,51 @@ class LocationWeather extends React.Component {
             </div>
           </div>
           {/* <h2 className="tempName">{temperatureF} &deg;F </h2> */}
-
         </div>
-      );
-    
+      
+      )
+      }else {
+        return (
+          <div className="container  weatherSkeleton">
+            <div className="row datagrid__row">
+              <div className="col-md-12">
+                <div className="datagrid__loader" ></div>
+              </div>
+              </div>
+              <div className="row datagrid__row">
+              <div className="col-md-6">
+                <div className="datagrid__loader second" ></div>
+              </div>
+              <div className="col-md-6">
+                <div className="datagrid__loader second" ></div>
+              </div>
+              </div>
+
+            <div class="row datagrid__row">
+              <div class="col-md-4 offset-md-4">
+                <div className="datagrid__loader third" ></div>
+              </div>
+            </div>
+
+            <div className="row datagrid__row">
+              <div className="col-md-12">
+                <div className="datagrid__loader second" ></div>
+              </div>
+              </div>
+              <div className="row datagrid__row">
+              <div className="col-md-12">
+                <div className="datagrid__loader second" ></div>
+              </div>
+              </div>
+              <div className="row datagrid__row">
+              <div className="col-md-12">
+                <div className="datagrid__loader second" ></div>
+              </div>
+              </div>
+            
+          </div>
+        )
+      }
   }
 
 }
