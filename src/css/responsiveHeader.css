@@ -64,7 +64,7 @@
 
 @media (max-width: 1800px){
 .exchange{
-    width: 154%!important;
+    width: 151%!important;
     margin-top: 5% !important;
     min-height: auto !important;
 }
@@ -101,6 +101,9 @@
     }
     .weatherSkeleton {
         width: 318px !important;
+    }
+    .cityNameInfo {
+        width: 105% !important;
     }
 
     .exchange{
