@@ -27,7 +27,9 @@ class GoogleMapComp extends Component {
     .catch((err) => {
       this.setState({ errorMessage: err.message });
     });
-    this.renderMap();
+
+    this.renderMap()
+    
   }
 
   renderMap = () => {
@@ -39,18 +41,32 @@ class GoogleMapComp extends Component {
   initMap = () => {
     let he = this.state.latitude;
     let hi = this.state.longitude;
-    new window.google.maps.Map(document.getElementById('map'), {
-      center: {lat: he, lng: hi},
-      zoom: 14,
-      styles: mapStyle,
-    }); 
+
+    if (he !== undefined && hi !== undefined) {
+      new window.google.maps.Map(document.getElementById('map'), {
+        center: { lat: he, lng: hi },
+        zoom: 14,
+        styles: mapStyle,
+      });
+    }
   
   }
 
   render() {
-    return (
-      <div className="container-fluid mapDiv rounded" id="map"></div>
-    )
+    const { latitude } = this.state;
+
+    if (latitude === undefined) {
+      return(
+        <div className="container-fluid mapDiv rounded skeletonMap">
+          <div className="pin bounce"></div>
+          <div className="pulse"></div>
+        </div>
+      )
+    } else {
+      return (
+        <div className="container-fluid mapDiv rounded" id="map"></div>
+      )
+    }
   }
 
 }
