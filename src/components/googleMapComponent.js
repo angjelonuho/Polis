@@ -7,7 +7,7 @@ import '../css/responsiveBody.css';
 import '../css/skeleton.css';
 
 const mapStyle = require('../mapStyles/GoogleMapStyles.json');
-
+require('dotenv').config();
 const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 class GoogleMapComp extends Component {
