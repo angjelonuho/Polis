@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/Polis/static/css/main.78611f6d.chunk.css",
-    "main.js": "/Polis/static/js/main.a127ec31.chunk.js",
-    "main.js.map": "/Polis/static/js/main.a127ec31.chunk.js.map",
+    "main.css": "/Polis/static/css/main.f6451965.chunk.css",
+    "main.js": "/Polis/static/js/main.550cd392.chunk.js",
+    "main.js.map": "/Polis/static/js/main.550cd392.chunk.js.map",
     "runtime-main.js": "/Polis/static/js/runtime-main.de395dea.js",
     "runtime-main.js.map": "/Polis/static/js/runtime-main.de395dea.js.map",
     "static/css/2.47e06e2e.chunk.css": "/Polis/static/css/2.47e06e2e.chunk.css",
     "static/js/2.186ca422.chunk.js": "/Polis/static/js/2.186ca422.chunk.js",
     "static/js/2.186ca422.chunk.js.map": "/Polis/static/js/2.186ca422.chunk.js.map",
     "index.html": "/Polis/index.html",
-    "precache-manifest.d746e9921571b920b0c68a846212e5da.js": "/Polis/precache-manifest.d746e9921571b920b0c68a846212e5da.js",
+    "precache-manifest.c60a47703f0dda9ce7e98001efeea46e.js": "/Polis/precache-manifest.c60a47703f0dda9ce7e98001efeea46e.js",
     "service-worker.js": "/Polis/service-worker.js",
     "static/css/2.47e06e2e.chunk.css.map": "/Polis/static/css/2.47e06e2e.chunk.css.map",
-    "static/css/main.78611f6d.chunk.css.map": "/Polis/static/css/main.78611f6d.chunk.css.map",
+    "static/css/main.f6451965.chunk.css.map": "/Polis/static/css/main.f6451965.chunk.css.map",
     "static/js/2.186ca422.chunk.js.LICENSE": "/Polis/static/js/2.186ca422.chunk.js.LICENSE",
     "static/media/droplet.svg": "/Polis/static/media/droplet.47cfd45b.svg",
     "static/media/sunrise.svg": "/Polis/static/media/sunrise.8e152057.svg",
@@ -23,7 +23,7 @@
     "static/js/runtime-main.de395dea.js",
     "static/css/2.47e06e2e.chunk.css",
     "static/js/2.186ca422.chunk.js",
-    "static/css/main.78611f6d.chunk.css",
-    "static/js/main.a127ec31.chunk.js"
+    "static/css/main.f6451965.chunk.css",
+    "static/js/main.550cd392.chunk.js"
   ]
 }
