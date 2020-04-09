@@ -243,8 +243,6 @@ export default class GenerateBuildings extends React.Component {
 
     const { latitude, longitude } = this.state;
 
-    this.getPlaces(latitude, longitude);
-
     let closeModal1 = () => this.setState({ showModal1: false });
     let closeModal2 = () => this.setState({ showModal2: false });
     let closeModal3 = () => this.setState({ showModal3: false });
@@ -306,6 +304,7 @@ export default class GenerateBuildings extends React.Component {
         </>
       )
     } else {
+      this.getPlaces(latitude, longitude);
       return (
         <>
           <div className="city">

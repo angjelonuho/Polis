@@ -28,15 +28,17 @@ class GoogleMapComp extends Component {
       this.setState({ errorMessage: err.message });
     });
 
+    
   }
 
   renderMap = () => {
-    loadScript(`/maps/api/js?key=${API_KEY}&callback=initMap`)
-    window.initMap = this.initMap
+    loadScript(`/maps/api/js?key=${API_KEY}&callback=initMap`);
+    window.initMap = this.initMap;
   }
 
   //map fucntion
   initMap = () => {
+
     if (this.state.latitude !== undefined && this.state.longitude !== undefined) {
 
       let he = this.state.latitude;
@@ -55,8 +57,6 @@ class GoogleMapComp extends Component {
   render() {
 
     const { latitude, longitude } = this.state;
-    
-    this.renderMap();
 
     if (latitude === undefined || longitude === undefined) {
       return(
@@ -66,6 +66,7 @@ class GoogleMapComp extends Component {
         </div>
       )
     } else {
+      this.renderMap();
       return (
         <div className="container-fluid mapDiv rounded" id="map"></div>
       )
