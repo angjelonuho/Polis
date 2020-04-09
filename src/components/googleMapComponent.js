@@ -28,8 +28,6 @@ class GoogleMapComp extends Component {
       this.setState({ errorMessage: err.message });
     });
 
-    this.renderMap()
-    
   }
 
   renderMap = () => {
@@ -39,23 +37,27 @@ class GoogleMapComp extends Component {
 
   //map fucntion
   initMap = () => {
-    let he = this.state.latitude;
-    let hi = this.state.longitude;
+    if (this.state.latitude !== undefined && this.state.longitude !== undefined) {
 
-    if (he !== undefined && hi !== undefined) {
+      let he = this.state.latitude;
+      let hi = this.state.longitude;
+
       new window.google.maps.Map(document.getElementById('map'), {
         center: { lat: he, lng: hi },
         zoom: 14,
         styles: mapStyle,
       });
     }
-  
+
   }
 
-  render() {
-    const { latitude } = this.state;
 
-    if (latitude === undefined) {
+  render() {
+
+    const { latitude, longitude } = this.state;
+    this.renderMap();
+
+    if (latitude === undefined || longitude === undefined) {
       return(
         <div className="container-fluid mapDiv rounded skeletonMap">
           <div className="pin bounce"></div>

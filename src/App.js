@@ -9,7 +9,7 @@ function App() {
     return (
         <div className="App container-fluid">
              <DayNight /> 
-             <GenerateBuildings />
+             {/* <GenerateBuildings /> */}
              <GoogleMapComp /> 
         
         </div>
