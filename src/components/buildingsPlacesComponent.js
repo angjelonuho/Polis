@@ -66,14 +66,20 @@ export default class GenerateBuildings extends React.Component {
       showModal17: false,
       showModal18: false,
 
+      latitude: undefined,
+      longitude: undefined,
+
     };
 
   }
 
   coordinates = () => {
     getPosition()
-      .then(position => {
-        this.getPlaces(position.coords.latitude, position.coords.longitude);
+      .then((position) => {
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        })
       })
       .catch(err => {
         this.setState({ errorMessage: err.message });
@@ -86,35 +92,37 @@ export default class GenerateBuildings extends React.Component {
 
   getPlaces = async (latitude, longitude) => {
 
-    const api_callCafe = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=cafe&key=${API_KEY}`);
-    const dataCafe = await api_callCafe.json();
+    if (latitude !== undefined || longitude !== undefined) {
 
-    const api_callRestaurant = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=restaurant&key=${API_KEY}`);
-    const dataRestaurant = await api_callRestaurant.json();
+      const api_callCafe = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=cafe&key=${API_KEY}`);
+      const dataCafe = await api_callCafe.json();
 
-    const api_callBar = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=bar&key=${API_KEY}`);
-    const databar = await api_callBar.json();
+      const api_callRestaurant = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=restaurant&key=${API_KEY}`);
+      const dataRestaurant = await api_callRestaurant.json();
+
+      const api_callBar = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=bar&key=${API_KEY}`);
+      const databar = await api_callBar.json();
 
 
-    let arrayPlaceIds = [];
+      let arrayPlaceIds = [];
 
-    for (let plc = 0; plc <= 19; plc++) {
-      
-      //Cofe push
-      arrayPlaceIds.push(dataCafe.results[plc].place_id);
-      //Restorant push
-      arrayPlaceIds.push(dataRestaurant.results[plc].place_id);
-      //Bar push
-      arrayPlaceIds.push(databar.results[plc].place_id);
+      for (let plc = 0; plc <= 19; plc++) {
+
+        //Cofe push
+        arrayPlaceIds.push(dataCafe.results[plc].place_id);
+        //Restorant push
+        arrayPlaceIds.push(dataRestaurant.results[plc].place_id);
+        //Bar push
+        arrayPlaceIds.push(databar.results[plc].place_id);
+      }
+
+      const uniqueSet = new Set(arrayPlaceIds);
+      arrayPlaceIds = [...uniqueSet];
+
+
+
+      this.getPlacesDetails(arrayPlaceIds);
     }
-
-    const uniqueSet = new Set(arrayPlaceIds);
-    arrayPlaceIds = [...uniqueSet];
-
- 
-
-    this.getPlacesDetails(arrayPlaceIds);
-
   }
 
   getPlacesDetails = async (arrayPlaceIds) => {
@@ -233,8 +241,10 @@ export default class GenerateBuildings extends React.Component {
 
   render() {
 
-    const {errorMessage} = this.state;
-    
+    const { latitude, longitude } = this.state;
+
+    this.getPlaces(latitude, longitude);
+
     let closeModal1 = () => this.setState({ showModal1: false });
     let closeModal2 = () => this.setState({ showModal2: false });
     let closeModal3 = () => this.setState({ showModal3: false });
@@ -255,10 +265,10 @@ export default class GenerateBuildings extends React.Component {
     let closeModal18 = () => this.setState({ showModal18: false });
 
 
-    if (errorMessage) {
+    if (latitude === undefined || longitude === undefined) {
       return (
         <>
-           <div className="city">
+          <div className="city">
             <div className="block double-wide">
               <div className="intersection"></div>
               <div className="intersection"></div>
@@ -267,24 +277,24 @@ export default class GenerateBuildings extends React.Component {
               <div className="intersection"></div>
               <div className="intersection"></div>
               <div className="buildings buildSkeleton">
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
-              <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
+                <div className="building skeletonBuild" data-depth="1"></div>
 
               </div>
               <div className="vehicles">
@@ -2431,7 +2441,7 @@ export default class GenerateBuildings extends React.Component {
           </div>
         </>
       )
-  
+
     }
   }
 

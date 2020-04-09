@@ -8,9 +8,9 @@ function App() {
 
     return (
         <div className="App container-fluid">
-             <DayNight /> 
-             {/* <GenerateBuildings /> */}
-             <GoogleMapComp /> 
+             <DayNight />
+             <GenerateBuildings />
+             <GoogleMapComp />
         
         </div>
 

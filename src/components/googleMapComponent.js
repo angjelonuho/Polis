@@ -55,6 +55,7 @@ class GoogleMapComp extends Component {
   render() {
 
     const { latitude, longitude } = this.state;
+    
     this.renderMap();
 
     if (latitude === undefined || longitude === undefined) {
