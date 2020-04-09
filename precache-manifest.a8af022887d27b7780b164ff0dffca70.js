@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0e8de9358c2b8b7e0cdddc76040e1884",
+    "revision": "22eb8999d3c54d2c15eda061b14b90c3",
     "url": "/Polis/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Polis/static/css/2.47e06e2e.chunk.css"
   },
   {
-    "revision": "568052d68aa366a8fa52",
+    "revision": "3d8b5c1f0d3daf73c064",
     "url": "/Polis/static/css/main.6c0d655d.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Polis/static/js/2.186ca422.chunk.js.LICENSE"
   },
   {
-    "revision": "568052d68aa366a8fa52",
-    "url": "/Polis/static/js/main.3bc3bd4c.chunk.js"
+    "revision": "3d8b5c1f0d3daf73c064",
+    "url": "/Polis/static/js/main.1b56ba4e.chunk.js"
   },
   {
     "revision": "c4d280610ee059393662",
