@@ -32,7 +32,7 @@ class GoogleMapComp extends Component {
   }
 
   renderMap = () => {
-    loadScript(`/maps/api/js?key=${API_KEY}&callback=initMap`);
+    loadScript(`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap`);
     window.initMap = this.initMap;
   }
 
