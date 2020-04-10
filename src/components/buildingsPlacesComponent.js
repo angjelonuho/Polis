@@ -94,71 +94,14 @@ export default class GenerateBuildings extends React.Component {
 
     if (latitude !== undefined || longitude !== undefined) {
 
-      let dataCafe = [];
-      let dataRestaurant = [] ;
-      let databar = [];
+      const api_callCafe = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=cafe&key=${API_KEY}`);
+      const dataCafe = await api_callCafe.json();
 
-      await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=cafe&key=${API_KEY}`, {
-        mode: 'no-cors'
-      })
-        .then(
-          response => {
-            if (response.status !== 200) {
-              console.log('Looks like there was a problem. Status Code: ' +
-                response.status);
-              return;
-            }
+      const api_callRestaurant = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=restaurant&key=${API_KEY}`);
+      const dataRestaurant = await api_callRestaurant.json();
 
-            response.json().then(data => {
-              dataCafe = data;
-            })
-          }
-        )
-        .catch(function (err) {
-          console.log('Fetch Error :-S', err);
-        });
-
-       await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=restaurant&key=${API_KEY}`, {
-        mode: 'no-cors' // 'cors' by default
-      })
-      .then(
-        response => {
-          if (response.status !== 200) {
-            console.log('Looks like there was a problem. Status Code: ' +
-              response.status);
-            return;
-          }
-
-          response.json().then(data => {
-            dataRestaurant = data;
-          })
-        }
-      )
-      .catch(function (err) {
-        console.log('Fetch Error :-S', err);
-      });
-
-
-       await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=bar&key=${API_KEY}`, {
-        mode: 'no-cors' // 'cors' by default
-      })
-      .then(
-        response => {
-          if (response.status !== 200) {
-            console.log('Looks like there was a problem. Status Code: ' +
-              response.status);
-            return;
-          }
-
-          response.json().then(data => {
-            databar = data;
-          })
-        }
-      )
-      .catch(function (err) {
-        console.log('Fetch Error :-S', err);
-      });
-
+      const api_callBar = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=bar&key=${API_KEY}`);
+      const databar = await api_callBar.json();
 
 
       let arrayPlaceIds = [];
@@ -189,9 +132,7 @@ export default class GenerateBuildings extends React.Component {
 
     for (let i = 0; i <= 17; i++) {
 
-      api_Details = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${arrayPlaceIds[i]}&key=${API_KEY}`, {
-        mode: 'no-cors' //'cors' by default
-      })
+      api_Details = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${arrayPlaceIds[i]}&key=${API_KEY}`);
       DeData = await api_Details.json();
 
       nameTitle.push(DeData.result.name);
