@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/static/css/main.6c0d655d.chunk.css",
-    "main.js": "/static/js/main.a29d2f7c.chunk.js",
-    "main.js.map": "/static/js/main.a29d2f7c.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.81ebfc9a.js",
-    "runtime-main.js.map": "/static/js/runtime-main.81ebfc9a.js.map",
-    "static/css/2.47e06e2e.chunk.css": "/static/css/2.47e06e2e.chunk.css",
-    "static/js/2.cdeac5ee.chunk.js": "/static/js/2.cdeac5ee.chunk.js",
-    "static/js/2.cdeac5ee.chunk.js.map": "/static/js/2.cdeac5ee.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.e9a76ceb41dbf0af2f432a49e31c104c.js": "/precache-manifest.e9a76ceb41dbf0af2f432a49e31c104c.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.47e06e2e.chunk.css.map": "/static/css/2.47e06e2e.chunk.css.map",
-    "static/css/main.6c0d655d.chunk.css.map": "/static/css/main.6c0d655d.chunk.css.map",
-    "static/js/2.cdeac5ee.chunk.js.LICENSE": "/static/js/2.cdeac5ee.chunk.js.LICENSE",
-    "static/media/droplet.svg": "/static/media/droplet.47cfd45b.svg",
-    "static/media/sunrise.svg": "/static/media/sunrise.8e152057.svg",
-    "static/media/sunset.svg": "/static/media/sunset.cdc8210e.svg",
-    "static/media/wind.svg": "/static/media/wind.8255af02.svg"
+    "main.css": "/Polis/static/css/main.6c0d655d.chunk.css",
+    "main.js": "/Polis/static/js/main.eed7bec1.chunk.js",
+    "main.js.map": "/Polis/static/js/main.eed7bec1.chunk.js.map",
+    "runtime-main.js": "/Polis/static/js/runtime-main.de395dea.js",
+    "runtime-main.js.map": "/Polis/static/js/runtime-main.de395dea.js.map",
+    "static/css/2.47e06e2e.chunk.css": "/Polis/static/css/2.47e06e2e.chunk.css",
+    "static/js/2.2cb0e008.chunk.js": "/Polis/static/js/2.2cb0e008.chunk.js",
+    "static/js/2.2cb0e008.chunk.js.map": "/Polis/static/js/2.2cb0e008.chunk.js.map",
+    "index.html": "/Polis/index.html",
+    "precache-manifest.a705df8bccc9fe07d5785dad7b56c0a4.js": "/Polis/precache-manifest.a705df8bccc9fe07d5785dad7b56c0a4.js",
+    "service-worker.js": "/Polis/service-worker.js",
+    "static/css/2.47e06e2e.chunk.css.map": "/Polis/static/css/2.47e06e2e.chunk.css.map",
+    "static/css/main.6c0d655d.chunk.css.map": "/Polis/static/css/main.6c0d655d.chunk.css.map",
+    "static/js/2.2cb0e008.chunk.js.LICENSE": "/Polis/static/js/2.2cb0e008.chunk.js.LICENSE",
+    "static/media/droplet.svg": "/Polis/static/media/droplet.47cfd45b.svg",
+    "static/media/sunrise.svg": "/Polis/static/media/sunrise.8e152057.svg",
+    "static/media/sunset.svg": "/Polis/static/media/sunset.cdc8210e.svg",
+    "static/media/wind.svg": "/Polis/static/media/wind.8255af02.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.81ebfc9a.js",
+    "static/js/runtime-main.de395dea.js",
     "static/css/2.47e06e2e.chunk.css",
-    "static/js/2.cdeac5ee.chunk.js",
+    "static/js/2.2cb0e008.chunk.js",
     "static/css/main.6c0d655d.chunk.css",
-    "static/js/main.a29d2f7c.chunk.js"
+    "static/js/main.eed7bec1.chunk.js"
   ]
 }
