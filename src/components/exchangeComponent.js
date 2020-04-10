@@ -37,7 +37,7 @@ class Exchange extends Component {
 
     fetchDropdownCurr = async () => {
 
-        await fetch("/latest")
+        await fetch("https://api.exchangeratesapi.io/latest")
 
             .then(
                 response => {
@@ -63,7 +63,7 @@ class Exchange extends Component {
 
     convertFetch = async () => {
 
-        await fetch(`/latest?base=${this.state.fromCurrency}&symbols=${this.state.toCurrency}`)
+        await fetch(`https://api.exchangeratesapi.io/latest?base=${this.state.fromCurrency}&symbols=${this.state.toCurrency}`)
             .then(
                 response => {
                     if (response.status !== 200) {
