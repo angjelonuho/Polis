@@ -95,17 +95,17 @@ export default class GenerateBuildings extends React.Component {
 
     if (latitude !== undefined || longitude !== undefined) {
 
-      const api_callCafe = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=cafe&key=${API_KEY}`,{
+      const api_callCafe = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=cafe&key=${API_KEY}`,{
         mode: 'no-cors' // 'cors' by default
       });
       const dataCafe = await api_callCafe.json();
 
-      const api_callRestaurant = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=restaurant&key=${API_KEY}`,{
+      const api_callRestaurant = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=restaurant&key=${API_KEY}`,{
         mode: 'no-cors' // 'cors' by default
       });
       const dataRestaurant = await api_callRestaurant.json();
 
-      const api_callBar = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=bar&key=${API_KEY}`,{
+      const api_callBar = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=bar&key=${API_KEY}`,{
         mode: 'no-cors' // 'cors' by default
       });
       const databar = await api_callBar.json();
