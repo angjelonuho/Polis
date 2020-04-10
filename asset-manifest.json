@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Polis/static/css/main.6c0d655d.chunk.css",
-    "main.js": "/Polis/static/js/main.573c77fd.chunk.js",
-    "main.js.map": "/Polis/static/js/main.573c77fd.chunk.js.map",
+    "main.js": "/Polis/static/js/main.fa764aed.chunk.js",
+    "main.js.map": "/Polis/static/js/main.fa764aed.chunk.js.map",
     "runtime-main.js": "/Polis/static/js/runtime-main.de395dea.js",
     "runtime-main.js.map": "/Polis/static/js/runtime-main.de395dea.js.map",
     "static/css/2.47e06e2e.chunk.css": "/Polis/static/css/2.47e06e2e.chunk.css",
     "static/js/2.2cb0e008.chunk.js": "/Polis/static/js/2.2cb0e008.chunk.js",
     "static/js/2.2cb0e008.chunk.js.map": "/Polis/static/js/2.2cb0e008.chunk.js.map",
     "index.html": "/Polis/index.html",
-    "precache-manifest.b183abcb5376780f8bcfda42d20fe216.js": "/Polis/precache-manifest.b183abcb5376780f8bcfda42d20fe216.js",
+    "precache-manifest.bf75bf859cfd16f28298398269c029c4.js": "/Polis/precache-manifest.bf75bf859cfd16f28298398269c029c4.js",
     "service-worker.js": "/Polis/service-worker.js",
     "static/css/2.47e06e2e.chunk.css.map": "/Polis/static/css/2.47e06e2e.chunk.css.map",
     "static/css/main.6c0d655d.chunk.css.map": "/Polis/static/css/main.6c0d655d.chunk.css.map",
@@ -24,6 +24,6 @@
     "static/css/2.47e06e2e.chunk.css",
     "static/js/2.2cb0e008.chunk.js",
     "static/css/main.6c0d655d.chunk.css",
-    "static/js/main.573c77fd.chunk.js"
+    "static/js/main.fa764aed.chunk.js"
   ]
 }
