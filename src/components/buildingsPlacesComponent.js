@@ -96,13 +96,13 @@ export default class GenerateBuildings extends React.Component {
     if (latitude !== undefined || longitude !== undefined) {
 
       const api_callCafe = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=cafe&key=${API_KEY}`);
-      const dataCafe = await api_callCafe.xml();
+      const dataCafe = await api_callCafe.json();
 
       const api_callRestaurant = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=restaurant&key=${API_KEY}`);
-      const dataRestaurant = await api_callRestaurant.xml();
+      const dataRestaurant = await api_callRestaurant.json();
 
       const api_callBar = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=bar&key=${API_KEY}`);
-      const databar = await api_callBar.xml();
+      const databar = await api_callBar.json();
 
 
       let arrayPlaceIds = [];
@@ -134,7 +134,7 @@ export default class GenerateBuildings extends React.Component {
     for (let i = 0; i <= 17; i++) {
 
       api_Details = await fetch(`/maps/api/place/details/json?place_id=${arrayPlaceIds[i]}&key=${API_KEY}`);
-      DeData = await api_Details.xml();
+      DeData = await api_Details.json();
 
       nameTitle.push(DeData.result.name);
       address.push(DeData.result.vicinity);
