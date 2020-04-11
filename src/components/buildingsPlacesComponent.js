@@ -94,30 +94,25 @@ export default class GenerateBuildings extends React.Component {
 
     if (latitude !== undefined || longitude !== undefined) {
 
-      const api_callCafe = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=cafe&key=${API_KEY}`,{
+      const api_callCafe = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=cafe&key=${API_KEY}`,{
         headers: {
           'Origin': 'https://maps.googleapis.com',
-          'Access-Control-Allow-Origin': 'https://angjelonuho.github.io/Polis/',
-          'Access-Control-Request-Method': 'POST',
-          'Access-Control-Request-Headers': 'Content-Type, Authorization' 
+          'Access-Control-Allow-Origin': 'https://angjelonuho.github.io/Polis/'
         }});
       const dataCafe = await api_callCafe.json();
 
-      const api_callRestaurant = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=restaurant&key=${API_KEY}`,{
+      const api_callRestaurant = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=restaurant&key=${API_KEY}`,{
         headers: {
           'Origin': 'https://maps.googleapis.com',
-          'Access-Control-Allow-Origin': 'https://angjelonuho.github.io/Polis/',
-          'Access-Control-Request-Method': 'POST',
-          'Access-Control-Request-Headers': 'Content-Type, Authorization' 
+          'Access-Control-Allow-Origin': 'https://angjelonuho.github.io/Polis/'
         }});
       const dataRestaurant = await api_callRestaurant.json();
 
-      const api_callBar = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=bar&key=${API_KEY}`,{
+      const api_callBar = await fetch(`/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=bar&key=${API_KEY}`,{
         headers: {
           'Origin': 'https://maps.googleapis.com',
-          'Access-Control-Allow-Origin': 'https://angjelonuho.github.io/Polis/',
-          'Access-Control-Request-Method': 'POST',
-          'Access-Control-Request-Headers': 'Content-Type, Authorization' 
+          'Access-Control-Allow-Origin': 'https://angjelonuho.github.io/Polis/'
+
         }});
       const databar = await api_callBar.json();
 
@@ -150,12 +145,10 @@ export default class GenerateBuildings extends React.Component {
 
     for (let i = 0; i <= 17; i++) {
 
-      api_Details = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${arrayPlaceIds[i]}&key=${API_KEY}`,{
+      api_Details = await fetch(`/maps/api/place/details/json?place_id=${arrayPlaceIds[i]}&key=${API_KEY}`,{
         headers: {
           'Origin': 'https://maps.googleapis.com',
-          'Access-Control-Allow-Origin': 'http://localhost:3000',
-          'Access-Control-Request-Method': 'POST',
-          'Access-Control-Request-Headers': 'Content-Type, Authorization' 
+          'Access-Control-Allow-Origin': 'http://localhost:3000'
         }
       });
       DeData = await api_Details.json();
