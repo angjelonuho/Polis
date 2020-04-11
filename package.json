@@ -3,7 +3,6 @@
   "name": "city",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://angjelonuho.github.io/Polis",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
