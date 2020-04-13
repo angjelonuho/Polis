@@ -20,6 +20,7 @@ import '../css/responsiveHeader.css';
 import '../css/responsiveBody.css';
 import '../css/skeleton.css';
 
+require('dotenv').config();
 const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 
