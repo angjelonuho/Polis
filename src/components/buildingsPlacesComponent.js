@@ -96,24 +96,21 @@ export default class GenerateBuildings extends React.Component {
 
       const api_callCafe = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=cafe&key=${API_KEY}`,{
         headers:{
-          'Access-Control-Allow-Origin': '*',
-          dataType: "text",
+          'Access-Control-Allow-Origin': '*'
         }
       });
       const dataCafe = await api_callCafe.json();
 
       const api_callRestaurant = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=restaurant&key=${API_KEY}`,{
         headers:{
-          'Access-Control-Allow-Origin': '*',
-          dataType: "text",
+          'Access-Control-Allow-Origin': '*'
         }
       });
       const dataRestaurant = await api_callRestaurant.json();
 
       const api_callBar = await fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=bar&key=${API_KEY}`,{
         headers:{
-          'Access-Control-Allow-Origin': '*',
-          dataType: "text",
+          'Access-Control-Allow-Origin': '*'
         }
       });
       const databar = await api_callBar.json();
@@ -149,9 +146,7 @@ export default class GenerateBuildings extends React.Component {
 
       api_Details = await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${arrayPlaceIds[i]}&key=${API_KEY}`,{
         headers:{
-          'Access-Control-Allow-Origin': '*',
-          dataType: "text",
-          
+          'Access-Control-Allow-Origin': '*'
         }
       });
       DeData = await api_Details.json();
