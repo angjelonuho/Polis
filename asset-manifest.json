@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/Polis/static/css/main.6c0d655d.chunk.css",
-    "main.js": "/Polis/static/js/main.1b56ba4e.chunk.js",
-    "main.js.map": "/Polis/static/js/main.1b56ba4e.chunk.js.map",
-    "runtime-main.js": "/Polis/static/js/runtime-main.de395dea.js",
-    "runtime-main.js.map": "/Polis/static/js/runtime-main.de395dea.js.map",
-    "static/css/2.47e06e2e.chunk.css": "/Polis/static/css/2.47e06e2e.chunk.css",
-    "static/js/2.186ca422.chunk.js": "/Polis/static/js/2.186ca422.chunk.js",
-    "static/js/2.186ca422.chunk.js.map": "/Polis/static/js/2.186ca422.chunk.js.map",
-    "index.html": "/Polis/index.html",
-    "precache-manifest.a8af022887d27b7780b164ff0dffca70.js": "/Polis/precache-manifest.a8af022887d27b7780b164ff0dffca70.js",
-    "service-worker.js": "/Polis/service-worker.js",
-    "static/css/2.47e06e2e.chunk.css.map": "/Polis/static/css/2.47e06e2e.chunk.css.map",
-    "static/css/main.6c0d655d.chunk.css.map": "/Polis/static/css/main.6c0d655d.chunk.css.map",
-    "static/js/2.186ca422.chunk.js.LICENSE": "/Polis/static/js/2.186ca422.chunk.js.LICENSE",
-    "static/media/droplet.svg": "/Polis/static/media/droplet.47cfd45b.svg",
-    "static/media/sunrise.svg": "/Polis/static/media/sunrise.8e152057.svg",
-    "static/media/sunset.svg": "/Polis/static/media/sunset.cdc8210e.svg",
-    "static/media/wind.svg": "/Polis/static/media/wind.8255af02.svg"
+    "main.css": "/static/css/main.6c0d655d.chunk.css",
+    "main.js": "/static/js/main.0b9c48d1.chunk.js",
+    "main.js.map": "/static/js/main.0b9c48d1.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.81ebfc9a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.81ebfc9a.js.map",
+    "static/css/2.47e06e2e.chunk.css": "/static/css/2.47e06e2e.chunk.css",
+    "static/js/2.bec8020f.chunk.js": "/static/js/2.bec8020f.chunk.js",
+    "static/js/2.bec8020f.chunk.js.map": "/static/js/2.bec8020f.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.f513bdd20f3a2328365a03fb231f617a.js": "/precache-manifest.f513bdd20f3a2328365a03fb231f617a.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.47e06e2e.chunk.css.map": "/static/css/2.47e06e2e.chunk.css.map",
+    "static/css/main.6c0d655d.chunk.css.map": "/static/css/main.6c0d655d.chunk.css.map",
+    "static/js/2.bec8020f.chunk.js.LICENSE": "/static/js/2.bec8020f.chunk.js.LICENSE",
+    "static/media/droplet.svg": "/static/media/droplet.47cfd45b.svg",
+    "static/media/sunrise.svg": "/static/media/sunrise.8e152057.svg",
+    "static/media/sunset.svg": "/static/media/sunset.cdc8210e.svg",
+    "static/media/wind.svg": "/static/media/wind.8255af02.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.de395dea.js",
+    "static/js/runtime-main.81ebfc9a.js",
     "static/css/2.47e06e2e.chunk.css",
-    "static/js/2.186ca422.chunk.js",
+    "static/js/2.bec8020f.chunk.js",
     "static/css/main.6c0d655d.chunk.css",
-    "static/js/main.1b56ba4e.chunk.js"
+    "static/js/main.0b9c48d1.chunk.js"
   ]
 }
