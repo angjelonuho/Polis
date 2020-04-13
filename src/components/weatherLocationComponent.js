@@ -10,7 +10,7 @@ import '../css/responsiveHeader.css';
 import '../css/responsiveBody.css';
 
 
-
+require('dotenv').config();
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 //ASK user for geographic position
