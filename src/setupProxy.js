@@ -7,7 +7,6 @@ module.exports = function(app) {
       createProxyMiddleware({
         target: 'https://maps.googleapis.com',
         changeOrigin: true,
-        ws: true, // proxy websockets
         logLevel: "debug"
         
       })
