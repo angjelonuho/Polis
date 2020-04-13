@@ -8,6 +8,9 @@ module.exports = function(app) {
         target: 'https://maps.googleapis.com',
         changeOrigin: true,
         ws: true, // proxy websockets
+        logLevel: "debug"
+        
       })
     );
   };
+  
