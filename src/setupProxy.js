@@ -7,7 +7,10 @@ module.exports = function(app) {
       createProxyMiddleware({
         target: 'https://maps.googleapis.com',
         changeOrigin: true,
-        logLevel: "debug"
+        logLevel: "debug",
+        pathRewrite: {
+          '^/maps': 'https://maps.googleapis.com/maps'
+        },
         
       })
     );
