@@ -308,6 +308,7 @@ export default class GenerateBuildings extends React.Component {
       this.getPlaces(latitude, longitude);
       return (
         <>
+        <p>hekki</p>
           <div className="city">
             <div className="block double-wide">
               <div className="intersection"></div>
