@@ -1,5 +1,5 @@
-# Mini E-Comerce 
-This is a small e-comerce project selling exact eight product a week.
+# Polis
+This turism guide/helper project simplifying information comming from different APIs.
 
 
 ## Snapshots
@@ -22,8 +22,7 @@ A step by step series of examples that tell you how to get a development env run
 ## Built With
 
 * Reactjs
-* Redux
-* Material-UI
+* react-bootstrap
 
 ## Authors
 * *Angjelo Nuho*
