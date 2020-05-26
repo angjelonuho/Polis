@@ -1,5 +1,5 @@
 # Polis
-This is turism guide/helper project simplifying information comming from different APIs.
+This is a turism guide/helper project simplifying information comming from different APIs.
 
 
 ## Snapshots
